@@ -28,7 +28,7 @@ biblio-style: apalike
 link-citations: yes
 abstract: |
   This is where the abstract should go.
-description: "A short description"
+description: "An analysis of headways on UVX responding to TSP"
 ---
 
 # Introduction {#intro}
