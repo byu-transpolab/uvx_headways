@@ -5,24 +5,27 @@ author:
     email: gregmacfarlane@byu.edu
     affiliation: Brigham Young University
     footnote: 1
-  - name: Bob Example
-    email: bob@example.com
+  - name: Grant Schultz
+    email: gschultz@byu.edu
     affiliation: Brigham Young University
-  - name: Cat Example
+  - name: Michael Sheffield
     email: cat@example.com
-    affiliation: Another University
+    affiliation: WCEC
+  - name: Logan Bennett
+    email: cat@example.com
+    affiliation: Brigham Young University
 address:
   - code: Brigham Young University
     address: Civil and Environmental Engineering Department, 430 Engineering Building, Provo, Utah 84602
-  - code: Another University
-    address: Some Other Place
+  - code: WCEC
+    address: Some other place
 footnote:
   - code: 1
     text: "Corresponding Author"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: article
-journal: "Submitted to Journal"
+journal: "Submitted to Journal of Public Transportation"
 bibliography: [book.bib]
 biblio-style: apalike
 link-citations: yes
