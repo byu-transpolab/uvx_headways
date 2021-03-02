@@ -1,10 +1,11 @@
 # Methods
 
-We describe our methods in this chapter.
+
 
 ## Data
 
 ```{r load_data}
-
+# this dataset was constructed from raw data using the script in R/datamaker.R
+uvx_time_points <- read_rds("data/uvx_timepoints.rds")
 ```
 
