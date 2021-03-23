@@ -1,5 +1,5 @@
 ---
-title: "Article Long Title"
+title: "The Effect of Transit Signal Priority on Headway Adherence for Bus Rapid Transit"
 author:
   - name: Gregory Macfarlane
     email: gregmacfarlane@byu.edu
@@ -25,7 +25,7 @@ footnote:
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: article
-journal: "Submitted to Journal of Public Transportation"
+journal: "Submitted to Transport Findings"
 bibliography: [book.bib]
 biblio-style: apalike
 link-citations: yes
@@ -34,4 +34,21 @@ abstract: |
 description: "An analysis of headways on UVX responding to TSP"
 ---
 
-# Introduction {#intro}
+# Questions {#intro}
+
+Transit signal priority (TSP) is a technology that allows traffic signals to
+change their timing plans to accommodate transit vehicles. This may involve
+extending a green phase until the vehicle passes, triggering an early green if
+there is a vehicle waiting at the light, or even running specific transit-only
+phases if the transit vehicles must make a turn across the automobile traffic lanes.
+TSP is an important tool in helping transit vehicles maintain on-time
+performance [citations]. Often, TSP will only be triggered at a specific signal
+if the vehicle is running some amount behind its schedule, thus maximizing green
+time for automobiles and minimizing automobile delay when the bus is otherwise
+on schedule.
+
+In high-frequency transit systems where the goal is not schedule adherence but rather
+*headway* adherence, the specific vehicle schedule might not be published for transit
+riders. The research question is therefore whether TSP can help 
+
+

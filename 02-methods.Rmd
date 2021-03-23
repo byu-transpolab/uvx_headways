@@ -1,4 +1,35 @@
-# Literature
+# Methods 
+
+## Data
+
+```{r load_data}
+# this dataset was constructed from raw data using the script in R/datamaker.R
+# the processed data cannot be stored because it is too big for git
+uvx_time_points <- read_rds("data/uvx_timepoints.rds")
+```
+
+
+In 2018, the Utah Transit Authority (UTA) launched a Bus Rapid Transit (BRT)
+system in Provo, Utah, United States. Known as the Utah Valley eXpress (UVX), 
+the system was highly successful prior to the onset of the COVID-19 pandemic 
+with more than 10,000 riders per average weekday [cite].  The system connects
+two commuter rail stations, two major universities (Brigham Young and Utah Valley),
+and commercial retail districts in Orem and Provo. The system includes X miles of
+dedicated lanes on its X-mile route, and 18 stations with a mix of center and side
+boarding, all at level floors. The system has been free for all riders since its
+opening.
+
+
+
+## Data
+
+```{r load_data}
+# this dataset was constructed from raw data using the script in R/datamaker.R
+# the processed data cannot be stored because it is too big for git
+uvx_time_points <- read_rds("data/uvx_timepoints.rds")
+```
+
+
 
 Bus Rapid Transit (BRT) systems are increasingly used by cities around the world
 due to their ability to address high passenger demand without exorbitant upfront
