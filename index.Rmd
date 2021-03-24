@@ -1,5 +1,5 @@
 ---
-title: "The Effect of Transit Signal Priority on Headway Adherence for Bus Rapid Transit"
+title: "The Effect of Transit Signal Priority on Bus Rapid Transit Headway Adherence"
 author:
   - name: Gregory Macfarlane
     email: gregmacfarlane@byu.edu
@@ -30,7 +30,16 @@ bibliography: [book.bib]
 biblio-style: apalike
 link-citations: yes
 abstract: |
-  This is where the abstract should go.
+  In an effort to reduce automobile delay, some
+  transit signal priority systems only trigger when a transit vehicle is behind its schedule. This
+  can cause a perceived discrepancy when a high-frequency transit system
+  operating on a headway basis without a published schedule requires TSP: the
+  passengers may feel they waited too long for the next bus when the bus is
+  still running on its internal (unpublished) schedule. We report the results of
+  an experiment conducted on the Utah Valley eXpress (UVX) bus rapid transit (BRT)
+  system in Provo and Orem, Utah during the spring and summer of 2019. The TSP
+  system varied between four settings: 0 minutes late (always give TSP), 2 minutes late,
+  5 minutes late, and never. 
 description: "An analysis of headways on UVX responding to TSP"
 ---
 
@@ -42,20 +51,20 @@ extending a green phase until the vehicle passes, triggering an early green if
 there is a vehicle waiting at the light, or even running specific transit-only
 phases if the transit vehicles must make a turn across the automobile traffic lanes.
 TSP is an important tool in helping transit vehicles maintain on-time
-performance [citations]. Often, TSP will only be triggered at a specific signal
+performance [@Liu2018]. Often, TSP will only be triggered at a specific signal
 if the vehicle is running some amount behind its schedule, thus maximizing green
 time for automobiles and minimizing automobile delay when the bus is otherwise
-on schedule.
+on schedule [@NI20201]. 
 
 In high-frequency transit systems where the goal is not schedule adherence but
-rather *headway* adherence, the specific vehicle schedule might not be published
-for transit riders. The specific vehicles might follow an internal schedule, but 
-it is not clear whether headway adherence can be improved with a schedule-based TSP 
-regime. The research questions are therefore:
+rather *headway* adherence, the schedule might not be published for transit
+riders. The specific vehicles might follow an internal schedule, but there could
+be a discrepancy when passengers perceive a bus being "late" when it is on-time
+by its unpublished schedule. The research questions are therefore:
 
   - Does TSP improve headway adherence for rapid transit systems?
+  - Is there an average improvement, or is there a reduction only in extreme delay?
   - Does the improvement change by time of day or for particular portions of 
   a rapid transit route?
-  - Is there an average improvement, or is there a reduction only in extreme delay?
 
 
