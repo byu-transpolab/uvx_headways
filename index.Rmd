@@ -30,16 +30,11 @@ bibliography: [book.bib]
 biblio-style: apalike
 link-citations: yes
 abstract: |
-  In an effort to reduce automobile delay, some
-  transit signal priority systems only trigger when a transit vehicle is behind its schedule. This
-  can cause a perceived discrepancy when a high-frequency transit system
-  operating on a headway basis without a published schedule requires TSP: the
-  passengers may feel they waited too long for the next bus when the bus is
-  still running on its internal (unpublished) schedule. We report the results of
-  an experiment conducted on the Utah Valley eXpress (UVX) bus rapid transit (BRT)
-  system in Provo and Orem, Utah during the spring and summer of 2019. The TSP
-  system varied between four settings: 0 minutes late (always give TSP), 2 minutes late,
-  5 minutes late, and never. 
+  We report the results of an experiment to evaluate the impact of transit 
+  signal priority (TSP) systems on headway adherence for a bus rapid transit (BRT) system
+  in Provo and Orem, Utah. The system will grant TSP if the bus is running behind
+  its unpublished schedule; the research question is whether TSP has an effect on
+  the headway between vehicles, which is what users perceive.
 description: "An analysis of headways on UVX responding to TSP"
 ---
 

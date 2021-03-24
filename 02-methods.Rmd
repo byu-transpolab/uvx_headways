@@ -2,15 +2,7 @@
 
 ```{r setup}
 library(tidyverse)
-```
-
-
-## Data
-
-```{r load_data}
-# this dataset was constructed from raw data using the script in R/datamaker.R
-# the processed data cannot be stored because it is too big for git
-uvx_time_points <- read_rds("data/uvx_timepoints.rds")
+library(lubridate)
 ```
 
 
@@ -24,148 +16,48 @@ dedicated lanes on its X-mile route, and 18 stations with a mix of center and si
 boarding, all at level floors. The system has been free for all riders since its
 opening.
 
+```{r load_data}
+# this dataset was constructed from raw data using the script in R/datamaker.R
+uvx_time_points <- read_rds("data/uvx_timepoints.rds") %>%
+  # only keep weekdays
+  filter(wday(time) %in% c(2:5)) %>%
+  # only keep timepoints between 7 AM and 8 PM.
+  filter(hour(time) >= 7, hour(time) <= 20) %>%
+  # get rid of east bay stops
+  filter(!timepoint %in% c("EASTBAYN", "EASTBAYS", "PROVFRST - 1", "PROVFRST - 2", "TOWNCNTR - 1", "TOWNCNTR - 2", "PROVFRST"))
+```
 
 
+```{r times, eval = FALSE}
+# determine when the experiment switched values
+uvx_time_points %>%
+  arrange(time) %>%
+  mutate(
+    tchange = ifelse(threshold == lead(threshold), FALSE, TRUE),
+    tperiod = cumsum(tchange)
+  ) %>%
+  group_by(tperiod, threshold) %>%
+  summarise(start = min(date), end = max(date), n = n()) %>%
+  arrange(start) %>%
+  filter(n > 1)
+```
 
+UTA provided GPS timepoint data for all trips on the UVX system for the entirety
+of 2019. We calculated the headway between successive UVX trips at each stop.
+Because the UVX route loops around south Provo and stops at the Provo
+FrontRunner station twice, this created some minor difficulties in data
+processing, and we removed the timepoints on this portion of the route. We also
+limit our analysis to the period between 7 AM and 8 PM.
 
-Bus Rapid Transit (BRT) systems are increasingly used by cities around the world
-due to their ability to address high passenger demand without exorbitant upfront
-costs. The cost savings come from the fact that BRTs operate on Right-of-Way
-category B (ROW-B) facilities with separated designated lanes that are subject
-to traffic control at intersections. In this way, buses have an unimpeded
-corridor on which to complete trips. However, the subjection to traffic control
-creates variability in the operating times of these systems, and several
-strategies have been developed and implemented to increase their reliability and
-operating times.One such strategy is the use of Transit Signal Priority (TSP),
-which alters priority at signalized intersections to provide for reduced running
-times between stops and a more even distribution of headways. In general, TSP
-seeks to improve operations by increasing the efficiency with which buses
-navigate signalized intersections, but it can be distinguished by a few classes
-[@DELGADO201528]:
+From January through June 6, the system operated with a 5-minute TSP threshold,.
+with TSP granted only if the vehicle was five or more minutes behind its scheduled
+timepoint. After August 12, the system switched to a 2-minute TSP threshold. During the
+summer, the TSP system was configured as follows for this experiment: 
+  - May 2 through June 6, 2019: 5 minute threshold
+  - June 10 through July 12 and after August 12: 2 minute threshold
+  - July 15 through July 26: no TSP
+  - July 30 through August 9: TSP always activated
+We discarded trips from January through April and September through December
+because the additional university passenger demand could interfere in the experiment.
 
-  1.Active or passive priority. Active priority involves timing adjustments made
-  according to real-time data. Passive priority involves offline measures, such
-  as optimized cycle lengths, based off of historical data.
-
-  2.Total, partial, or relative priority. In total priority, control actions such
-  as phase jumping, phase insertion, green extension, or early termination of
-  the red seek to create zero delay for buses. Partial priority limits control
-  actions to those that provide less interruptions to other traffic, such as
-  green extensions and early termination of the red. In relative priority, buses
-  compete with general traffic at lights for priority.
-
-  3.Unconditional or conditional priority. Unconditional priority means buses
-  receive priority at all times whereas conditional priority only provides buses
-  with needed control measures when the buses are late.
-
-Adaptive signal priority involves real-time control adjustments made in order to
-optimize the throughput of both buses and general traffic,in which the delay of
-each is considered and a controller decides on a response most pertinent to the
-current traffic conditions. @NI20201 compares adaptive signal priority with
-active and passive priority, whereas @ALDEEK2017227 groups it with unconditional
-and conditional priority.
-
-Many studies have been done to determine the effects of various TSP strategies
-and configurations. In general, TSP strategies have been found to improve
-performance of transit systems such as BRT in a number of ways, including
-reduced delay, improved reliability, and mitigated effects on general traffic.
-
-@ISHAQ2020946 used a set of trip data from a BRT system in Haifa, Israel to
-study the relation between service reliability, fleet management, and service
-utilization. They found that full and unconditional traffic signal priority
-given at all signals led to an 18% reduction in total vehicle trip time and
-contributed to a 60% reduction in the standard deviation of trip time.
-Similarly, @ALDEEK2017227 found that compared to several other TSP strategies,
-BRT with unconditional TSP provided the best travel time, speed, number of
-stops, and delay enhancements but resulted in significant crossing street
-delays, especially at major intersections with high traffic demand. While the
-unconditionalTSP strategy was found effective in termsof the delay of the BRT
-system, concerns rise over the effects on side-street traffic if unconditional
-priority consistently gives right of way to the buses. @Liu2018 clarified that
-“signal priorities are provided more efficiently and on a more informed basis,
-with fewer impacts on other traffic operations than the use of unconditional
-TSP.”The implementation of unconditional TSP may only be practical where
-crossing street volumes are low, and must reasonably be done in conjunction with
-studies of how non-transit traffic is effected, as each system’s corridors have
-differing needs based off of demand and geometry.
-
-@Liu2018 performed a study using transit operation data from a bus route found
-  in Salt Lake County, Utah. A microscopic simulation was used to test GPS-based
-  TSP scenarios. GPS-based TSP uses a GPS to achieve real-time (active) bus
-  locating and advanced wireless communication technologies to achieve
-  comprehensive analysis of operating information. Then a data-driven
-  optimization method was implemented to understand the effects of flexible
-  granting of signal priority across several models. They found that overall,
-  BRT travel time decreased in all models where TSP was employed when compared
-  to the base BRT model. @ALDEEK2017227 also used simulation models to compare
-  several scenarios. Using field data from a corridor in Orlando, Florida, they
-  found that BRT with conditional TSP that was engaged when the buses were 3
-  minutes behind experienced significantly improved travel times, average speed,
-  and average total delay per vehicle, with minor effects on crossing street
-  delays, when compared with BRT systems with no TSP or 5-minute conditional
-  thresholds.These results indicate that TSP methods are effective in reducing
-  delay. However, they ignore the important aspect of system reliability, which
-  is critical to improving running times and maintaining ridership.
-
-@YANG20151 performed a study of a pre-detective TSP strategy for BRT with active
-  priority coordination between primary and secondary intersections using data
-  from Changzhou, China. Using microscopic simulation, they tested three
-  scenarios (traditional TSP, pre-detective TSP, and pre-detective TSP with
-  coordination) against a no TSP base scenario. They found that pre-detective
-  signal priority with coordination was most effective, with bus intersection
-  delay decreasing by 67.4% and headway adherence improving by about 40% when
-  compared with a no TSP strategy, while reducing normal traffic delay.
-
-@DELGADO201528 studied station and interstation control jointly to determine an
-  optimal control strategy for a single-service transit corridor applied to a
-  high-frequency transit system, with the goal of evaluating effects over the
-  whole corridor. A strategy of green extension with holding buses at stops was
-  shown to produce a greater reduction in waiting times for users, as well as
-  reducing variability and improving headway adherence.
-
-@NI20201 performed a study of passive TSP control for a BRT system in Taichung,
-  Taiwan. Microsimulation incorporated with a genetic algorithm was developed to
-  coordinate signal offsets along an arterial with BRT operations, with the
-  purpose of balancing improvements in BRT system delays and changes to LOS of
-  other traffic. They found that passive TSP control can reduce approximately
-  22% of transit delay, with the smallest delay experienced in conjunction with
-  a strategy of a three-minute scheduled headway. Additionally, the 3-minute
-  departure headway scenario exhibited the best service reliability among the
-  scenarios, with a headway stability near 100%.
-
-These studies indicate the need to view BRT system performance in terms of both
-system delay and reliability. Especially when viewed across an entire system, it
-is possible for running times to remain consistent while reliability of
-individual buses is low. In particular, a bunching phenomenon may occur from a
-positive feedback loop of fluctuations in passenger demand and traffic
-conditions (@DELGADO201528).In scenarios where bunching is a problem, it may not
-be sufficient to base control strategies off of a schedule, rather on reliable
-operations. This may prove difficult in implementation. For instance,
-@ISHAQ2020946 noted that the procurement agreement between the public transport
-authority in Israel and the incumbent operator implies that a schedule-based
-control strategy is required, as opposed to a headway-based (reliability-based)
-control strategy. However, when TSP control strategies are reliability-based,
-measures of reliability increase and the bunching phenomenon can be reduced.
-
-@CATS2014223 performed a study of a regularity-driven operation scheme in
-  Stockholm, Sweden to improve reliability and mitigate bus bunching. Using a
-  series of field experiments and measuring performance with regularity
-  indicators such as headway coefficient of variation, headway adherence, and
-  average excess waiting time, he determined that a headway-based control
-  strategy was effective in not only narrowing the headway distribution from the
-  previous schedule-bases strategy, but also reducing waiting times, more evenly
-  distributing dwell times, and maintaining running times. @CHEN2012 also
-  performed a headway-based study to measure the effects of real-time preventive
-  operations control. They found that reliability is improved with lower
-  permitted headway deviations and lower fluctuations of running times. When
-  real-time information is used to predict service reliability and trigger
-  preventive control, such as reduced dwell time and speed adjustments, bus
-  bunching can be reduced.
-
-Both of these studies effectively demonstrate that solutions to bunching and
-other reliability-based operational problems are most effectively addressed
-through reliability-based control strategies. However, little has been done to
-evaluate the relationship between methods of TSP in a reliability-based control
-strategy. A study of TSP strategies with a focus on headway distribution could
-prove useful in gauging the benefits of TSP in a headway-based system, such as
-the UVX BRT system in Utah Valley.
+To evaluate the effect of changing TSP threshold on headway adherence, we consider 
