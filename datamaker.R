@@ -32,6 +32,11 @@ processed_data <- raw_data %>%
     # change level descriptions for TSP thresholds
     threshold = factor(Threshold, levels = c("OFF", "5", "2", "ON"), 
                        labels = c("No TSP", "5 min", "2 min", "Always"))
+  ) %>%
+  filter(!is.na(threshold)) %>%
+  filter(
+    date > as_date("2019-05-01"),
+    date < as_date("2019-08-31")
   )
 
 write_rds(processed_data, "data/uvx_timepoints.rds")
