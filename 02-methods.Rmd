@@ -1,5 +1,10 @@
 # Methods 
 
+```{r setup}
+library(tidyverse)
+```
+
+
 ## Data
 
 ```{r load_data}
@@ -20,14 +25,6 @@ boarding, all at level floors. The system has been free for all riders since its
 opening.
 
 
-
-## Data
-
-```{r load_data}
-# this dataset was constructed from raw data using the script in R/datamaker.R
-# the processed data cannot be stored because it is too big for git
-uvx_time_points <- read_rds("data/uvx_timepoints.rds")
-```
 
 
 

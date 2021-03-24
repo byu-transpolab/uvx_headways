@@ -47,8 +47,15 @@ if the vehicle is running some amount behind its schedule, thus maximizing green
 time for automobiles and minimizing automobile delay when the bus is otherwise
 on schedule.
 
-In high-frequency transit systems where the goal is not schedule adherence but rather
-*headway* adherence, the specific vehicle schedule might not be published for transit
-riders. The research question is therefore whether TSP can help 
+In high-frequency transit systems where the goal is not schedule adherence but
+rather *headway* adherence, the specific vehicle schedule might not be published
+for transit riders. The specific vehicles might follow an internal schedule, but 
+it is not clear whether headway adherence can be improved with a schedule-based TSP 
+regime. The research questions are therefore:
+
+  - Does TSP improve headway adherence for rapid transit systems?
+  - Does the improvement change by time of day or for particular portions of 
+  a rapid transit route?
+  - Is there an average improvement, or is there a reduction only in extreme delay?
 
 
