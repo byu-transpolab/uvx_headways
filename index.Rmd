@@ -27,6 +27,7 @@ site: bookdown::bookdown_site
 documentclass: article
 journal: "Submitted to Transport Findings"
 bibliography: [book.bib]
+layout: "3p, authoryear, review"
 biblio-style: apalike
 link-citations: yes
 abstract: |
@@ -40,26 +41,27 @@ description: "An analysis of headways on UVX responding to TSP"
 
 # Questions {#intro}
 
-Transit signal priority (TSP) is a technology that allows traffic signals to
-change their timing plans to accommodate transit vehicles. This may involve
-extending a green phase until the vehicle passes, triggering an early green if
-there is a vehicle waiting at the light, or even running specific transit-only
-phases if the transit vehicles must make a turn across the automobile traffic lanes.
-TSP is an important tool in helping transit vehicles maintain on-time
-performance [@Liu2018]. Often, TSP will only be triggered at a specific signal
-if the vehicle is running some amount behind its schedule, thus maximizing green
-time for automobiles and minimizing automobile delay when the bus is otherwise
-on schedule [@NI20201]. 
+Transit signal priority (TSP) allows traffic signals to flexibly accommodate
+transit vehicles. This may involve extending a green phase until the vehicle
+passes, triggering an early green if there is a vehicle waiting at the light, or
+even running specific transit-only phases. TSP helps transit vehicles maintain
+on-time performance [@Liu2018], but often TSP will only engage at a signal if
+the vehicle is running behind its schedule, thus minimizing automobile delay
+when the bus is otherwise on schedule [@NI20201].
 
-In high-frequency transit systems where the goal is not schedule adherence but
-rather *headway* adherence, the schedule might not be published for transit
-riders. The specific vehicles might follow an internal schedule, but there could
-be a discrepancy when passengers perceive a bus being "late" when it is on-time
-by its unpublished schedule. The research questions are therefore:
+In 2018, the Utah Transit Authority (UTA) launched the Utah Valley Express (UVX) 
+Bus Rapid Transit (BRT) system in Provo and Orem, Utah.  The system connects
+two commuter rail stations, two major universities (Brigham Young and Utah Valley),
+and commercial districts in Orem and Provo. UVX has TSP on X of the X traffic 
+signals along its route. The TSP is triggered when a vehicle is behind its schedule;
+however, the system does not publish a schedule and rather attempts to maintain
+a specific headway (6 minutes in the peak period).
 
-  - Does TSP improve headway adherence for rapid transit systems?
+The research questions are therefore:
+
+  - Does schedule-based TSP improve headway adherence for rapid transit systems?
   - Is there an average improvement, or is there a reduction only in extreme delay?
-  - Does the improvement change by time of day or for particular portions of 
+  - Is there an improvement difference by time of day or for particular portions of 
   a rapid transit route?
 
 
