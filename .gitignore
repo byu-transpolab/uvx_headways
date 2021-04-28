@@ -6,3 +6,5 @@
 *.aux
 *.log
 *.spl
+
+_targets/*
