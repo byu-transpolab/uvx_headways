@@ -1,7 +1,8 @@
 # Findings
 
-
-```{r}
-
+```{r ecdf}
+tar_load(ecdf)
+ecdf
 ```
+
 
