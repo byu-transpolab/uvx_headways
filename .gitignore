@@ -8,3 +8,4 @@
 *.spl
 
 _targets/*
+_bookdown_files/*
