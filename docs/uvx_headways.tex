@@ -68,6 +68,20 @@
 
 % Pandoc header
 \usepackage{booktabs}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
 
 
 
@@ -140,16 +154,6 @@ twice, this created some minor difficulties in data processing, and we removed
 the timepoints on this portion of the route. We also limit our analysis to the
 period between 7 AM and 8 PM.
 
-\begin{verbatim}
-## # A tibble: 4 x 5
-##   tperiod threshold start      end            n
-##     <int> <fct>     <date>     <date>     <int>
-## 1       0 5 min     2019-05-02 2019-06-06 43801
-## 2       0 2 min     2019-06-10 2019-08-29 70934
-## 3       0 No TSP    2019-07-15 2019-07-25 16312
-## 4       0 Always    2019-07-30 2019-08-08 16422
-\end{verbatim}
-
 From January through June 6, the system operated with a 5-minute TSP threshold,.
 with TSP granted only if the vehicle was five or more minutes behind its
 scheduled timepoint. After August 12, the system switched to a 2-minute TSP
@@ -173,27 +177,92 @@ because the additional university passenger demand could interfere in the
 experiment and there were no tests of the ``None'' or ``Always'' TSP thresholds
 during the school year.
 
-To evaluate the effect of changing TSP threshold on headway adherence, we
-consider two tests:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  A student's T-test of the mean headway deviation among trips during
-  different threshold periods. This is conducted with the \texttt{t.test()} function
-  in R \citep{R}.
-\item
-  A Kolmogorov-Smirnov test of the distribution of headway deviations,
-  conducted with the \texttt{ks.test()} function in R.
-\end{enumerate}
-
-The data is pooled with We consider
+Standard statistical tests --- such as the student's \(t\)-test or
+ordinary least squares regression models --- are designed to ascertain the
+significance of a statistic at the \emph{mean} of the distribution. In this
+application, we are less concerned with the mean deviation in headway, and are
+instead interested in whether TSP is able to reduce the lateness of buses that
+already have substantial deviation from their programmed headway. Consequently,
+we employ conditional quantile regression \citep{koenker2001quantile} to estimate the
+effect of TSP on headway deviation at the 85th percentile of the distribution.
+This is done with the \texttt{quantreg} package for R \citep{quantreg, R}
 
 \hypertarget{findings}{%
 \section{Findings}\label{findings}}
 
+Figure \ref{fig:ecdf} shows the empirical cumulative density function for the
+headway deviation data, grouped by TSP threshold. Visually, the difference
+between the various threshold settings is not dramatic. The 5-minute
+threshold appears to have slightly more vehicles arrive ahead of the
+scheduled headway, and slightly fewer arrive behind it, than the other three
+threshold groups. The median and average of the distribution for all four
+thresholds is remarkably similar, and strengthens our determination to
+examine the edges of the distribution with a quantile regression model.
+
+\begin{figure}
+\centering
 \includegraphics{uvx_headways_files/figure-latex/ecdf-1.pdf}
+\caption{\label{fig:ecdf}Cumulative probability distribution of headway deviation by threshold.}
+\end{figure}
+
+\begin{verbatim}
+## 'r2()' does not support models of class 'rq'.
+\end{verbatim}
+
+\begin{table}
+
+\caption{\label{tab:models}85th Percentile Regression Estimates}
+\centering
+\begin{tabular}[t]{lcccc}
+\toprule
+  & Threshold & Direction & Peak & All\\
+\midrule
+(Intercept) & 2.067 (46.600)*** & 1.683 (65.528)*** & 1.967 (57.740)*** & 1.650 (68.493)***\\
+TSP: 5 minutes & 0.300 (5.846)*** & 0.200 (6.113)*** & 0.233 (5.853)*** & 0.167 (5.579)***\\
+TSP: 2 minutes & -0.117 (-2.467)** & -0.067 (-2.433)** & -0.117 (-3.569)*** & -0.083 (-3.366)***\\
+TSP: Always & -0.100 (-1.800)* & -0.083 (-2.430)** & -0.100 (-2.562)** & -0.100 (-2.849)***\\
+Southbound &  & 0.917 (42.553)*** &  & 0.883 (27.572)***\\
+AM Peak &  &  & -0.050 (-2.284)** & 0.000 (0.000)\\
+PM Peak &  &  & 0.617 (21.248)*** & 0.533 (11.790)***\\
+Southbound \textbackslash{}times AM Peak &  &  &  & -0.067 (-1.282)\\
+Southbound \textbackslash{}times PM Peak &  &  &  & -0.183 (-2.757)***\\
+\midrule
+Num.Obs. & 157419 &  &  & \\
+AIC &  & 755372.3 & 759075.1 & 754484.1\\
+BIC &  & 755422.1 & 759134.9 & 754573.8\\
+Log.Lik. &  & -377681.135 & -379531.559 & -377233.029\\
+RMSE & 3.10 &  &  & \\
+\bottomrule
+\multicolumn{5}{l}{\textsuperscript{} t-statistics in parentheses}\\
+\multicolumn{5}{l}{\textsuperscript{} * p $<$ 0.1, ** p $<$ 0.05, *** p $<$ 0.01}\\
+\end{tabular}
+\end{table}
+
+Table \ref{tab:models} presents the estimates of four models with an array
+of explanatory variables. In the model labeled ``Threshold,'' each TSP threshold
+is controlled for with a dummy variable; the intercept term suggests that the
+85th percentile bus arrives with a headway 2.0666667
+minutes longer than it was supposed to have. The three threshold dummies are
+each significant, though the ordering of the coefficients is somewhat unintuitive.
+Relative to the situation with no TSP, making TSP always available reduces the
+headway of the 85th percentile bus by 0.1
+minutes, and engaging TSP at a 2-minute threshold reduces the headway by
+0.1166667. What is not intuitive is that
+engaging TSP with a 5-minute threshold actually makes the 85th percentile
+headway -0.3 minutes \emph{longer} than
+not using it at all.
+
+The other three models in Table \ref{tab:models} control for the direction
+of the service (southbound buses from Orem to Provo have a longer headway), the
+time period (operating in the PM peak lengthens the headway), and an interaction
+term between those two variables. With each additional control, the central
+findings related to TSP are unchanged in either magnitude or significance.
+
+The finding that a 5-minute TSP threshold appears to lengthen the headway
+relative to not using TSP at all is a curious finding, and we cannot immediately
+account for it. The experiment of which thresholds were engaged on which days
+was not randomized in any way, and it is possible that the results of this
+study are tied up in unaccounted seasonal variations.
 
 \bibliography{book.bib}
 

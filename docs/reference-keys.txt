@@ -1,5 +1,0 @@
-fig:ecdf
-tab:models
-intro
-methods
-findings
