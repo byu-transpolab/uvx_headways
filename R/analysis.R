@@ -24,9 +24,7 @@ make_ecdf <- function(headways){
   headways %>% 
     ggplot(aes(x = as.numeric(discrepancy) / 60, color = threshold)) +
     stat_ecdf() +
-    facet_wrap(~direction) +
-    xlab("Discrepancy between scheduled and actual timepoint [minutes]") +
-    ylab("Cumulative Probability")
+    coord_cartesian(xlim = c(-5, 6))
 }
 
 #' Calculate average discrepancy by group
@@ -62,7 +60,11 @@ p85_discrepancy <- function(headways){
 
 qr_estimate <- function(headways){
   data <- headways %>%
-    mutate(discrepancy = as.numeric(discrepancy))
+    mutate(
+      discrepancy = as.numeric(discrepancy)/60,
+      period = factor(period),
+      period = fct_relevel(period, "Off Peak")
+    )
   qfit_thold <- rq(discrepancy ~ threshold, tau = 0.85, data = data)
   qfit_dir <- update(qfit_thold, .~. + direction)
   qfit_pk  <- update(qfit_thold, .~. + period)
@@ -76,4 +78,7 @@ qr_estimate <- function(headways){
     "All"  = qfit_dirpk
   )
 }
+
+
+
 

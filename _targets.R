@@ -29,6 +29,6 @@ list(
   # data analysis and tables
   tar_target(period_change_table, get_period_change(headways)),
   tar_target(ecdf, make_ecdf(headways)),
-  tar_target(estimations, qr_estimate(headways))
+  tar_target(models, qr_estimate(headways))
 )
 

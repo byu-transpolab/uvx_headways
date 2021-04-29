@@ -3,6 +3,7 @@
 ```{r setup, include=FALSE}
 library(targets)
 library(tidyverse)
+library(modelsummary)
 
 if(knitr::is_latex_output()){
   knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
@@ -19,7 +20,7 @@ twice, this created some minor difficulties in data processing, and we removed
 the timepoints on this portion of the route. We also limit our analysis to the
 period between 7 AM and 8 PM.
 
-```{r times}
+```{r times, eval = FALSE}
 tar_load(period_change_table)
 period_change_table
 ```
@@ -40,13 +41,12 @@ because the additional university passenger demand could interfere in the
 experiment and there were no tests of the "None" or "Always" TSP thresholds
 during the school year.
 
-To evaluate the effect of changing TSP threshold on headway adherence, we
-consider two tests:
-
-1.  A student's T-test of the mean headway deviation among trips during
-    different threshold periods. This is conducted with the `t.test()` function
-    in R [@R].
-2.  A Kolmogorov-Smirnov test of the distribution of headway deviations,
-    conducted with the `ks.test()` function in R.
-
-The data is pooled with We consider
+Standard statistical tests --- such as the student's $t$-test or 
+ordinary least squares regression models --- are designed to ascertain the 
+significance of a statistic at the *mean* of the distribution. In this
+application, we are less concerned with the mean deviation in headway, and are
+instead interested in whether TSP is able to reduce the lateness of buses that
+already have substantial deviation from their programmed headway. Consequently,
+we employ conditional quantile regression [@koenker2001quantile] to estimate the
+effect of TSP on headway deviation at the 85th percentile of the distribution.
+This is done with the `quantreg` package for R [@quantreg; @R]
