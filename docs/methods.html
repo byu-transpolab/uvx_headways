@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title> 2 Methods | The Effect of Transit Signal Priority on Headway Adherence for Bus Rapid Transit</title>
+  <title> 2 Methods | The Effect of Transit Signal Priority on Bus Rapid Transit Headway Adherence</title>
   <meta name="description" content="An analysis of headways on UVX responding to TSP" />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content=" 2 Methods | The Effect of Transit Signal Priority on Headway Adherence for Bus Rapid Transit" />
+  <meta property="og:title" content=" 2 Methods | The Effect of Transit Signal Priority on Bus Rapid Transit Headway Adherence" />
   <meta property="og:type" content="book" />
   
   
@@ -16,14 +16,14 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content=" 2 Methods | The Effect of Transit Signal Priority on Headway Adherence for Bus Rapid Transit" />
+  <meta name="twitter:title" content=" 2 Methods | The Effect of Transit Signal Priority on Bus Rapid Transit Headway Adherence" />
   
   <meta name="twitter:description" content="An analysis of headways on UVX responding to TSP" />
   
 
 
 
-<meta name="date" content="2021-03-24" />
+<meta name="date" content="2021-04-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -42,6 +42,7 @@ div.abstract{
   width: 90%;
 }
 </style>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -59,22 +60,25 @@ div.abstract{
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -94,7 +98,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -127,6 +131,29 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -144,9 +171,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Questions</a></li>
-<li class="chapter" data-level="2" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>2</b> Methods</a><ul>
-<li class="chapter" data-level="2.1" data-path="methods.html"><a href="methods.html#data"><i class="fa fa-check"></i><b>2.1</b> Data</a></li>
-</ul></li>
+<li class="chapter" data-level="2" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>2</b> Methods</a></li>
 <li class="chapter" data-level="3" data-path="findings.html"><a href="findings.html"><i class="fa fa-check"></i><b>3</b> Findings</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -161,7 +186,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">The Effect of Transit Signal Priority on Headway Adherence for Bus Rapid Transit</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">The Effect of Transit Signal Priority on Bus Rapid Transit Headway Adherence</a>
           </h1>
         </div>
 
@@ -169,190 +194,53 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="methods" class="section level1">
+<div id="methods" class="section level1" number="2">
 <h1><span class="header-section-number"> 2</span> Methods</h1>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="methods.html#cb1-1"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
-<pre><code>## ── Attaching packages ──────────────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──</code></pre>
-<pre><code>## ✓ ggplot2 3.3.2.9000     ✓ purrr   0.3.4     
-## ✓ tibble  3.0.3          ✓ dplyr   1.0.2     
-## ✓ tidyr   1.1.2          ✓ stringr 1.4.0     
-## ✓ readr   1.3.1          ✓ forcats 0.5.0</code></pre>
-<pre><code>## Warning: package &#39;tibble&#39; was built under R version 4.0.2</code></pre>
-<pre><code>## Warning: package &#39;tidyr&#39; was built under R version 4.0.2</code></pre>
-<pre><code>## Warning: package &#39;dplyr&#39; was built under R version 4.0.2</code></pre>
-<pre><code>## ── Conflicts ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
-## x dplyr::filter() masks stats::filter()
-## x dplyr::lag()    masks stats::lag()</code></pre>
-<div id="data" class="section level2">
-<h2><span class="header-section-number">2.1</span> Data</h2>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="methods.html#cb8-1"></a><span class="co"># this dataset was constructed from raw data using the script in R/datamaker.R</span></span>
-<span id="cb8-2"><a href="methods.html#cb8-2"></a><span class="co"># the processed data cannot be stored because it is too big for git</span></span>
-<span id="cb8-3"><a href="methods.html#cb8-3"></a>uvx_time_points &lt;-<span class="st"> </span><span class="kw">read_rds</span>(<span class="st">&quot;data/uvx_timepoints.rds&quot;</span>)</span></code></pre></div>
-<p>In 2018, the Utah Transit Authority (UTA) launched a Bus Rapid Transit (BRT)
-system in Provo, Utah, United States. Known as the Utah Valley eXpress (UVX),
-the system was highly successful prior to the onset of the COVID-19 pandemic
-with more than 10,000 riders per average weekday [cite]. The system connects
-two commuter rail stations, two major universities (Brigham Young and Utah Valley),
-and commercial retail districts in Orem and Provo. The system includes X miles of
-dedicated lanes on its X-mile route, and 18 stations with a mix of center and side
-boarding, all at level floors. The system has been free for all riders since its
-opening.</p>
-<p>Bus Rapid Transit (BRT) systems are increasingly used by cities around the world
-due to their ability to address high passenger demand without exorbitant upfront
-costs. The cost savings come from the fact that BRTs operate on Right-of-Way
-category B (ROW-B) facilities with separated designated lanes that are subject
-to traffic control at intersections. In this way, buses have an unimpeded
-corridor on which to complete trips. However, the subjection to traffic control
-creates variability in the operating times of these systems, and several
-strategies have been developed and implemented to increase their reliability and
-operating times.One such strategy is the use of Transit Signal Priority (TSP),
-which alters priority at signalized intersections to provide for reduced running
-times between stops and a more even distribution of headways. In general, TSP
-seeks to improve operations by increasing the efficiency with which buses
-navigate signalized intersections, but it can be distinguished by a few classes
-<span class="citation">(Delgado et al. <a href="#ref-DELGADO201528" role="doc-biblioref">2015</a>)</span>:</p>
-<p>1.Active or passive priority. Active priority involves timing adjustments made
-according to real-time data. Passive priority involves offline measures, such
-as optimized cycle lengths, based off of historical data.</p>
-<p>2.Total, partial, or relative priority. In total priority, control actions such
-as phase jumping, phase insertion, green extension, or early termination of
-the red seek to create zero delay for buses. Partial priority limits control
-actions to those that provide less interruptions to other traffic, such as
-green extensions and early termination of the red. In relative priority, buses
-compete with general traffic at lights for priority.</p>
-<p>3.Unconditional or conditional priority. Unconditional priority means buses
-receive priority at all times whereas conditional priority only provides buses
-with needed control measures when the buses are late.</p>
-<p>Adaptive signal priority involves real-time control adjustments made in order to
-optimize the throughput of both buses and general traffic,in which the delay of
-each is considered and a controller decides on a response most pertinent to the
-current traffic conditions. <span class="citation">Ni et al. (<a href="#ref-NI20201" role="doc-biblioref">2020</a>)</span> compares adaptive signal priority with
-active and passive priority, whereas <span class="citation">Al-Deek et al. (<a href="#ref-ALDEEK2017227" role="doc-biblioref">2017</a>)</span> groups it with unconditional
-and conditional priority.</p>
-<p>Many studies have been done to determine the effects of various TSP strategies
-and configurations. In general, TSP strategies have been found to improve
-performance of transit systems such as BRT in a number of ways, including
-reduced delay, improved reliability, and mitigated effects on general traffic.</p>
-<p><span class="citation">Ishaq and Cats (<a href="#ref-ISHAQ2020946" role="doc-biblioref">2020</a>)</span> used a set of trip data from a BRT system in Haifa, Israel to
-study the relation between service reliability, fleet management, and service
-utilization. They found that full and unconditional traffic signal priority
-given at all signals led to an 18% reduction in total vehicle trip time and
-contributed to a 60% reduction in the standard deviation of trip time.
-Similarly, <span class="citation">Al-Deek et al. (<a href="#ref-ALDEEK2017227" role="doc-biblioref">2017</a>)</span> found that compared to several other TSP strategies,
-BRT with unconditional TSP provided the best travel time, speed, number of
-stops, and delay enhancements but resulted in significant crossing street
-delays, especially at major intersections with high traffic demand. While the
-unconditionalTSP strategy was found effective in termsof the delay of the BRT
-system, concerns rise over the effects on side-street traffic if unconditional
-priority consistently gives right of way to the buses. <span class="citation">Liu et al. (<a href="#ref-Liu2018" role="doc-biblioref">2018</a>)</span> clarified that
-“signal priorities are provided more efficiently and on a more informed basis,
-with fewer impacts on other traffic operations than the use of unconditional
-TSP.”The implementation of unconditional TSP may only be practical where
-crossing street volumes are low, and must reasonably be done in conjunction with
-studies of how non-transit traffic is effected, as each system’s corridors have
-differing needs based off of demand and geometry.</p>
-<p><span class="citation">Liu et al. (<a href="#ref-Liu2018" role="doc-biblioref">2018</a>)</span> performed a study using transit operation data from a bus route found
-in Salt Lake County, Utah. A microscopic simulation was used to test GPS-based
-TSP scenarios. GPS-based TSP uses a GPS to achieve real-time (active) bus
-locating and advanced wireless communication technologies to achieve
-comprehensive analysis of operating information. Then a data-driven
-optimization method was implemented to understand the effects of flexible
-granting of signal priority across several models. They found that overall,
-BRT travel time decreased in all models where TSP was employed when compared
-to the base BRT model. <span class="citation">Al-Deek et al. (<a href="#ref-ALDEEK2017227" role="doc-biblioref">2017</a>)</span> also used simulation models to compare
-several scenarios. Using field data from a corridor in Orlando, Florida, they
-found that BRT with conditional TSP that was engaged when the buses were 3
-minutes behind experienced significantly improved travel times, average speed,
-and average total delay per vehicle, with minor effects on crossing street
-delays, when compared with BRT systems with no TSP or 5-minute conditional
-thresholds.These results indicate that TSP methods are effective in reducing
-delay. However, they ignore the important aspect of system reliability, which
-is critical to improving running times and maintaining ridership.</p>
-<p><span class="citation">Yang et al. (<a href="#ref-YANG20151" role="doc-biblioref">2015</a>)</span> performed a study of a pre-detective TSP strategy for BRT with active
-priority coordination between primary and secondary intersections using data
-from Changzhou, China. Using microscopic simulation, they tested three
-scenarios (traditional TSP, pre-detective TSP, and pre-detective TSP with
-coordination) against a no TSP base scenario. They found that pre-detective
-signal priority with coordination was most effective, with bus intersection
-delay decreasing by 67.4% and headway adherence improving by about 40% when
-compared with a no TSP strategy, while reducing normal traffic delay.</p>
-<p><span class="citation">Delgado et al. (<a href="#ref-DELGADO201528" role="doc-biblioref">2015</a>)</span> studied station and interstation control jointly to determine an
-optimal control strategy for a single-service transit corridor applied to a
-high-frequency transit system, with the goal of evaluating effects over the
-whole corridor. A strategy of green extension with holding buses at stops was
-shown to produce a greater reduction in waiting times for users, as well as
-reducing variability and improving headway adherence.</p>
-<p><span class="citation">Ni et al. (<a href="#ref-NI20201" role="doc-biblioref">2020</a>)</span> performed a study of passive TSP control for a BRT system in Taichung,
-Taiwan. Microsimulation incorporated with a genetic algorithm was developed to
-coordinate signal offsets along an arterial with BRT operations, with the
-purpose of balancing improvements in BRT system delays and changes to LOS of
-other traffic. They found that passive TSP control can reduce approximately
-22% of transit delay, with the smallest delay experienced in conjunction with
-a strategy of a three-minute scheduled headway. Additionally, the 3-minute
-departure headway scenario exhibited the best service reliability among the
-scenarios, with a headway stability near 100%.</p>
-<p>These studies indicate the need to view BRT system performance in terms of both
-system delay and reliability. Especially when viewed across an entire system, it
-is possible for running times to remain consistent while reliability of
-individual buses is low. In particular, a bunching phenomenon may occur from a
-positive feedback loop of fluctuations in passenger demand and traffic
-conditions (<span class="citation">Delgado et al. (<a href="#ref-DELGADO201528" role="doc-biblioref">2015</a>)</span>).In scenarios where bunching is a problem, it may not
-be sufficient to base control strategies off of a schedule, rather on reliable
-operations. This may prove difficult in implementation. For instance,
-<span class="citation">Ishaq and Cats (<a href="#ref-ISHAQ2020946" role="doc-biblioref">2020</a>)</span> noted that the procurement agreement between the public transport
-authority in Israel and the incumbent operator implies that a schedule-based
-control strategy is required, as opposed to a headway-based (reliability-based)
-control strategy. However, when TSP control strategies are reliability-based,
-measures of reliability increase and the bunching phenomenon can be reduced.</p>
-<p><span class="citation">Cats (<a href="#ref-CATS2014223" role="doc-biblioref">2014</a>)</span> performed a study of a regularity-driven operation scheme in
-Stockholm, Sweden to improve reliability and mitigate bus bunching. Using a
-series of field experiments and measuring performance with regularity
-indicators such as headway coefficient of variation, headway adherence, and
-average excess waiting time, he determined that a headway-based control
-strategy was effective in not only narrowing the headway distribution from the
-previous schedule-bases strategy, but also reducing waiting times, more evenly
-distributing dwell times, and maintaining running times. <span class="citation">Chen et al. (<a href="#ref-CHEN2012" role="doc-biblioref">2012</a>)</span> also
-performed a headway-based study to measure the effects of real-time preventive
-operations control. They found that reliability is improved with lower
-permitted headway deviations and lower fluctuations of running times. When
-real-time information is used to predict service reliability and trigger
-preventive control, such as reduced dwell time and speed adjustments, bus
-bunching can be reduced.</p>
-<p>Both of these studies effectively demonstrate that solutions to bunching and
-other reliability-based operational problems are most effectively addressed
-through reliability-based control strategies. However, little has been done to
-evaluate the relationship between methods of TSP in a reliability-based control
-strategy. A study of TSP strategies with a focus on headway distribution could
-prove useful in gauging the benefits of TSP in a headway-based system, such as
-the UVX BRT system in Utah Valley.</p>
+<p>UTA provided timepoint data for all trips on the UVX system for the entirety of
+2019. We calculated the headway between successive UVX trips at each stop, as
+well as the cumulative dwell time of all stations along the route. Because the
+UVX route loops around south Provo and stops at the Provo FrontRunner station
+twice, this created some minor difficulties in data processing, and we removed
+the timepoints on this portion of the route. We also limit our analysis to the
+period between 7 AM and 8 PM.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="methods.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_load</span>(period_change_table)</span>
+<span id="cb1-2"><a href="methods.html#cb1-2" aria-hidden="true" tabindex="-1"></a>period_change_table</span></code></pre></div>
+<p>From January through June 6, the system operated with a 5-minute TSP threshold,.
+with TSP granted only if the vehicle was five or more minutes behind its
+scheduled timepoint. After August 12, the system switched to a 2-minute TSP
+threshold. During the summer, the TSP system was configured as follows for this
+experiment:</p>
+<ul>
+<li>May 2 through June 6, 2019: 5 minute threshold</li>
+<li>June 10 through July 12 and after August 12: 2 minute threshold</li>
+<li>July 15 through July 26: no TSP</li>
+<li>July 30 through August 9: TSP always activated</li>
+</ul>
+<p>We discarded trips from January through April and September through December
+because the additional university passenger demand could interfere in the
+experiment and there were no tests of the “None” or “Always” TSP thresholds
+during the school year.</p>
+<p>Standard statistical tests — such as the student’s <span class="math inline">\(t\)</span>-test or
+ordinary least squares regression models — are designed to ascertain the
+significance of a statistic at the <em>mean</em> of the distribution. In this
+application, we are less concerned with the mean deviation in headway, and are
+instead interested in whether TSP is able to reduce the lateness of buses that
+already have substantial deviation from their programmed headway. Consequently,
+we employ conditional quantile regression <span class="citation">(<a href="#ref-koenker2001quantile" role="doc-biblioref">Koenker and Hallock 2001</a>)</span> to estimate the
+effect of TSP on headway deviation at the 85th percentile of the distribution.
+This is done with the <code>quantreg</code> package for R <span class="citation">(<a href="#ref-quantreg" role="doc-biblioref">Koenker 2020</a>; <a href="#ref-R" role="doc-biblioref">R Core Team 2021</a>)</span></p>
 
 </div>
-</div>
 <h3>References</h3>
-<div id="refs" class="references">
-<div id="ref-ALDEEK2017227">
-<p>Al-Deek, Haitham, Adrian Sandt, Ahmad Alomari, and Omar Hussain. 2017. “A Technical Note on Evaluating the Effectiveness of Bus Rapid Transit with Transit Signal Priority.” <em>Journal of Intelligent Transportation Systems</em> 21 (3): 227–38. <a href="https://doi.org/10.1080/15472450.2017.1286987">https://doi.org/10.1080/15472450.2017.1286987</a>.</p>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-quantreg" class="csl-entry">
+Koenker, Roger. 2020. <em>Quantreg: Quantile Regression</em>. <a href="https://CRAN.R-project.org/package=quantreg">https://CRAN.R-project.org/package=quantreg</a>.
 </div>
-<div id="ref-CATS2014223">
-<p>Cats, Oded. 2014. “Regularity-Driven Bus Operation: Principles, Implementation and Business Models.” <em>Transport Policy</em> 36: 223–30. <a href="https://doi.org/https://doi.org/10.1016/j.tranpol.2014.09.002">https://doi.org/https://doi.org/10.1016/j.tranpol.2014.09.002</a>.</p>
+<div id="ref-koenker2001quantile" class="csl-entry">
+Koenker, Roger, and Kevin F Hallock. 2001. <span>“Quantile Regression.”</span> <em>Journal of Economic Perspectives</em> 15 (4): 143–56.
 </div>
-<div id="ref-CHEN2012">
-<p>Chen, Weiya, Chunhua Yang, Fenling Feng, and Zhiya Chen. 2012. “An Improved Model for Headway-Based Bus Service Unreliability Prevention with Vehicle Load Capacity Constraint at Bus Stops.” <em>Discrete Dynamics in Nature and Society</em> 2012 (December). <a href="https://doi.org/10.1155/2012/313518">https://doi.org/10.1155/2012/313518</a>.</p>
-</div>
-<div id="ref-DELGADO201528">
-<p>Delgado, Felipe, Juan Muñoz, Ricardo Giesen, and Nigel Wilson. 2015. “Integrated Real-Time Transit Signal Priority Control for High-Frequency Segregated Transit Services.” <em>Transportation Research Record: Journal of the Transportation Research Board</em> 2533 (November): 28–38. <a href="https://doi.org/10.3141/2533-04">https://doi.org/10.3141/2533-04</a>.</p>
-</div>
-<div id="ref-ISHAQ2020946">
-<p>Ishaq, Robert, and Oded Cats. 2020. “Designing Bus Rapid Transit Systems: Lessons on Service Reliability and Operations.” <em>Case Studies on Transport Policy</em> 8 (3): 946–53. <a href="https://doi.org/https://doi.org/10.1016/j.cstp.2020.05.001">https://doi.org/https://doi.org/10.1016/j.cstp.2020.05.001</a>.</p>
-</div>
-<div id="ref-Liu2018">
-<p>Liu, Xiaoyue Cathy, Milan Zlatkovic, Richard J. Porter, Kiavash Fayyaz, and Song Yu. 2018. “Improving Efficiency and Reliability of Bus Rapid Transit,” June.</p>
-</div>
-<div id="ref-NI20201">
-<p>Ni, Ying-Chuan, Hsien-Hao Lo, Yu-Ting Hsu, and Hung-Jen Huang. 2020. “Exploring the Effects of Passive Transit Signal Priority Design on Bus Rapid Transit Operation: A Microsimulation-Based Optimization Approach.” <em>Transportation Letters</em> 0 (0): 1–14. <a href="https://doi.org/10.1080/19427867.2020.1805681">https://doi.org/10.1080/19427867.2020.1805681</a>.</p>
-</div>
-<div id="ref-YANG20151">
-<p>Yang, Min Yang, Gang Sun, Wei Wang, Xin Sun, Jian Ding, and Jing Han. 2015. “Evaluation of the Pre-Detective Signal Priority for Bus Rapid Transit: Coordinating the Primary and Secondary Intersections.” <em>Transport</em> 33 (January): 1–11. <a href="https://doi.org/10.3846/16484142.2015.1004556">https://doi.org/10.3846/16484142.2015.1004556</a>.</p>
+<div id="ref-R" class="csl-entry">
+R Core Team. 2021. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/">https://www.R-project.org/</a>.
 </div>
 </div>
             </section>
@@ -384,6 +272,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -411,6 +300,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

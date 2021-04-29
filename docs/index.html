@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>The Effect of Transit Signal Priority on Headway Adherence for Bus Rapid Transit</title>
+  <title>The Effect of Transit Signal Priority on Bus Rapid Transit Headway Adherence</title>
   <meta name="description" content="An analysis of headways on UVX responding to TSP" />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="The Effect of Transit Signal Priority on Headway Adherence for Bus Rapid Transit" />
+  <meta property="og:title" content="The Effect of Transit Signal Priority on Bus Rapid Transit Headway Adherence" />
   <meta property="og:type" content="book" />
   
   
@@ -16,14 +16,14 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="The Effect of Transit Signal Priority on Headway Adherence for Bus Rapid Transit" />
+  <meta name="twitter:title" content="The Effect of Transit Signal Priority on Bus Rapid Transit Headway Adherence" />
   
   <meta name="twitter:description" content="An analysis of headways on UVX responding to TSP" />
   
 
 
 
-<meta name="date" content="2021-03-24" />
+<meta name="date" content="2021-04-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -42,6 +42,7 @@ div.abstract{
   width: 90%;
 }
 </style>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -59,22 +60,25 @@ div.abstract{
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -94,7 +98,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -127,6 +131,29 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -144,9 +171,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Questions</a></li>
-<li class="chapter" data-level="2" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>2</b> Methods</a><ul>
-<li class="chapter" data-level="2.1" data-path="methods.html"><a href="methods.html#data"><i class="fa fa-check"></i><b>2.1</b> Data</a></li>
-</ul></li>
+<li class="chapter" data-level="2" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>2</b> Methods</a></li>
 <li class="chapter" data-level="3" data-path="findings.html"><a href="findings.html"><i class="fa fa-check"></i><b>3</b> Findings</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -161,7 +186,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">The Effect of Transit Signal Priority on Headway Adherence for Bus Rapid Transit</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">The Effect of Transit Signal Priority on Bus Rapid Transit Headway Adherence</a>
           </h1>
         </div>
 
@@ -170,53 +195,70 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="header">
-<h1 class="title">The Effect of Transit Signal Priority on Headway Adherence for Bus Rapid Transit</h1>
-<p class="author"><em>Gregory Macfarlane</em></p>
+<h1 class="title">The Effect of Transit Signal Priority on Bus Rapid Transit Headway Adherence</h1>
+<p class="author" style="margin: 0.5em 0 -0.5em 0;"><em>Gregory Macfarlane</em></p>
 <address class="author_afil">
-Brigham Young University<br><a class="author_email" href="mailto:#"><a href="mailto:gregmacfarlane@byu.edu" class="email">gregmacfarlane@byu.edu</a></a>
+Brigham Young University<br>
+<a class="author_email" href="mailto:#"><a href="mailto:gregmacfarlane@byu.edu" class="email">gregmacfarlane@byu.edu</a></a>
 </address>
-<p class="author"><em>Grant Schultz</em></p>
+<p class="author" style="margin: 0.5em 0 -0.5em 0;"><em>Grant Schultz</em></p>
 <address class="author_afil">
-Brigham Young University<br><a class="author_email" href="mailto:#"><a href="mailto:gschultz@byu.edu" class="email">gschultz@byu.edu</a></a>
+Brigham Young University<br>
+<a class="author_email" href="mailto:#"><a href="mailto:gschultz@byu.edu" class="email">gschultz@byu.edu</a></a>
 </address>
-<p class="author"><em>Michael Sheffield</em></p>
+<p class="author" style="margin: 0.5em 0 -0.5em 0;"><em>Michael Sheffield</em></p>
 <address class="author_afil">
-WCEC<br><a class="author_email" href="mailto:#"><a href="mailto:cat@example.com" class="email">cat@example.com</a></a>
+WCEC<br>
+<a class="author_email" href="mailto:#"><a href="mailto:cat@example.com" class="email">cat@example.com</a></a>
 </address>
-<p class="author"><em>Logan Bennett</em></p>
+<p class="author" style="margin: 0.5em 0 -0.5em 0;"><em>Logan Bennett</em></p>
 <address class="author_afil">
-Brigham Young University<br><a class="author_email" href="mailto:#"><a href="mailto:cat@example.com" class="email">cat@example.com</a></a>
+Brigham Young University<br>
+<a class="author_email" href="mailto:#"><a href="mailto:cat@example.com" class="email">cat@example.com</a></a>
 </address>
-<p class="date"><em>2021-03-24</em></p>
+<p class="date" style="margin-top: 1.5em;"><em>2021-04-28</em></p>
 <div class="abstract">
 <p class="abstract">Abstract</p>
-<p>This is where the abstract should go.</p>
+<p>We report the results of an experiment to evaluate the impact of transit
+signal priority (TSP) systems on headway adherence for a bus rapid transit (BRT) system
+in Provo and Orem, Utah. The system will grant TSP if the bus is running behind
+its unpublished schedule; the research question is whether TSP has an effect on
+the headway between vehicles, which is what users perceive.</p>
 </div>
 </div>
-<div id="intro" class="section level1">
+<div id="intro" class="section level1" number="1">
 <h1><span class="header-section-number"> 1</span> Questions</h1>
-<p>Transit signal priority (TSP) is a technology that allows traffic signals to
-change their timing plans to accommodate transit vehicles. This may involve
-extending a green phase until the vehicle passes, triggering an early green if
-there is a vehicle waiting at the light, or even running specific transit-only
-phases if the transit vehicles must make a turn across the automobile traffic lanes.
-TSP is an important tool in helping transit vehicles maintain on-time
-performance [citations]. Often, TSP will only be triggered at a specific signal
-if the vehicle is running some amount behind its schedule, thus maximizing green
-time for automobiles and minimizing automobile delay when the bus is otherwise
-on schedule.</p>
-<p>In high-frequency transit systems where the goal is not schedule adherence but
-rather <em>headway</em> adherence, the specific vehicle schedule might not be published
-for transit riders. The specific vehicles might follow an internal schedule, but
-it is not clear whether headway adherence can be improved with a schedule-based TSP
-regime. The research questions are therefore:</p>
+<p>Transit signal priority (TSP) allows traffic signals to flexibly accommodate
+transit vehicles. This may involve extending a green phase until the vehicle
+passes, triggering an early green if there is a vehicle waiting at the light, or
+even running specific transit-only phases. TSP helps transit vehicles maintain
+on-time performance <span class="citation">(<a href="#ref-Liu2018" role="doc-biblioref">Liu et al. 2018</a>)</span>, but often TSP will only engage at a signal if
+the vehicle is running behind its schedule, thus minimizing automobile delay
+when the bus is otherwise on schedule <span class="citation">(<a href="#ref-NI20201" role="doc-biblioref">Ni et al. 2020</a>)</span>.</p>
+<p>In 2018, the Utah Transit Authority (UTA) launched the Utah Valley Express (UVX)
+Bus Rapid Transit (BRT) system in Provo and Orem, Utah. The system connects
+two commuter rail stations, two major universities (Brigham Young and Utah Valley),
+and commercial districts in Orem and Provo. UVX has TSP on X of the X traffic
+signals along its route. The TSP is triggered when a vehicle is behind its schedule;
+however, the system does not publish a schedule and rather attempts to maintain
+a specific headway (6 minutes in the peak period).</p>
+<p>The research questions are therefore:</p>
 <ul>
-<li>Does TSP improve headway adherence for rapid transit systems?</li>
-<li>Does the improvement change by time of day or for particular portions of
-a rapid transit route?</li>
+<li>Does schedule-based TSP improve headway adherence for rapid transit systems?</li>
 <li>Is there an average improvement, or is there a reduction only in extreme delay?</li>
+<li>Is there an improvement difference by time of day or for particular portions of
+a rapid transit route?</li>
 </ul>
 
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Liu2018" class="csl-entry">
+Liu, Xiaoyue Cathy, Milan Zlatkovic, Richard J. Porter, Kiavash Fayyaz, and Song Yu. 2018. <span>“Improving Efficiency and Reliability of Bus Rapid Transit,”</span> June.
+</div>
+<div id="ref-NI20201" class="csl-entry">
+Ni, Ying-Chuan, Hsien-Hao Lo, Yu-Ting Hsu, and Hung-Jen Huang. 2020. <span>“Exploring the Effects of Passive Transit Signal Priority Design on Bus Rapid Transit Operation: A Microsimulation-Based Optimization Approach.”</span> <em>Transportation Letters</em> 0 (0): 1–14. <a href="https://doi.org/10.1080/19427867.2020.1805681">https://doi.org/10.1080/19427867.2020.1805681</a>.
+</div>
 </div>
             </section>
 
@@ -247,6 +289,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -274,6 +317,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

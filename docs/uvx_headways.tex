@@ -1,4 +1,4 @@
-\documentclass[]{elsarticle} %review=doublespace preprint=single 5p=2 column
+\documentclass[3p, authoryear, review]{elsarticle} %review=doublespace preprint=single 5p=2 column
 %%% Begin My package additions %%%%%%%%%%%%%%%%%%%
 \usepackage[hyphens]{url}
 
@@ -34,47 +34,17 @@
 \IfFileExists{microtype.sty}{\usepackage{microtype}}{}
 \usepackage{natbib}
 \bibliographystyle{plainnat}
-\usepackage{color}
-\usepackage{fancyvrb}
-\newcommand{\VerbBar}{|}
-\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
-\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
-% Add ',fontsize=\small' for more characters per line
-\usepackage{framed}
-\definecolor{shadecolor}{RGB}{248,248,248}
-\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
-\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
-\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
-\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\BuiltInTok}[1]{#1}
-\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
-\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
-\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
-\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
-\newcommand{\ExtensionTok}[1]{#1}
-\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\ImportTok}[1]{#1}
-\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
-\newcommand{\NormalTok}[1]{#1}
-\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
-\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
-\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
-\newcommand{\RegionMarkerTok}[1]{#1}
-\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \usepackage{longtable}
+\usepackage{graphicx}
+% We will generate all images so they have a width \maxwidth. This means
+% that they will get their normal width if they fit onto the page, but
+% are scaled down if they would overflow the margins.
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+\else\Gin@nat@width\fi}
+\makeatother
+\let\Oldincludegraphics\includegraphics
+\renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=\maxwidth]{#1}}
 \ifxetex
   \usepackage[setpagesize=false, % page size defined by xetex
               unicode=false, % unicode breaks when used with xetex
@@ -85,7 +55,7 @@
 \hypersetup{breaklinks=true,
             bookmarks=true,
             pdfauthor={},
-            pdftitle={The Effect of Transit Signal Priority on Headway Adherence for Bus Rapid Transit},
+            pdftitle={The Effect of Transit Signal Priority on Bus Rapid Transit Headway Adherence},
             colorlinks=false,
             urlcolor=blue,
             linkcolor=magenta,
@@ -104,7 +74,7 @@
 \begin{document}
 \begin{frontmatter}
 
-  \title{The Effect of Transit Signal Priority on Headway Adherence for Bus Rapid Transit}
+  \title{The Effect of Transit Signal Priority on Bus Rapid Transit Headway Adherence}
     \author[Brigham Young University]{Gregory Macfarlane\corref{1}}
    \ead{gregmacfarlane@byu.edu} 
     \author[Brigham Young University]{Grant Schultz}
@@ -118,7 +88,11 @@
       \cortext[1]{Corresponding Author}
   
   \begin{abstract}
-  This is where the abstract should go.
+  We report the results of an experiment to evaluate the impact of transit
+  signal priority (TSP) systems on headway adherence for a bus rapid transit (BRT) system
+  in Provo and Orem, Utah. The system will grant TSP if the bus is running behind
+  its unpublished schedule; the research question is whether TSP has an effect on
+  the headway between vehicles, which is what users perceive.
   \end{abstract}
   
  \end{frontmatter}
@@ -126,212 +100,103 @@
 \hypertarget{intro}{%
 \section{Questions}\label{intro}}
 
-Transit signal priority (TSP) is a technology that allows traffic signals to
-change their timing plans to accommodate transit vehicles. This may involve
-extending a green phase until the vehicle passes, triggering an early green if
-there is a vehicle waiting at the light, or even running specific transit-only
-phases if the transit vehicles must make a turn across the automobile traffic lanes.
-TSP is an important tool in helping transit vehicles maintain on-time
-performance {[}citations{]}. Often, TSP will only be triggered at a specific signal
-if the vehicle is running some amount behind its schedule, thus maximizing green
-time for automobiles and minimizing automobile delay when the bus is otherwise
-on schedule.
+Transit signal priority (TSP) allows traffic signals to flexibly accommodate
+transit vehicles. This may involve extending a green phase until the vehicle
+passes, triggering an early green if there is a vehicle waiting at the light, or
+even running specific transit-only phases. TSP helps transit vehicles maintain
+on-time performance \citep{Liu2018}, but often TSP will only engage at a signal if
+the vehicle is running behind its schedule, thus minimizing automobile delay
+when the bus is otherwise on schedule \citep{NI20201}.
 
-In high-frequency transit systems where the goal is not schedule adherence but
-rather \emph{headway} adherence, the specific vehicle schedule might not be published
-for transit riders. The specific vehicles might follow an internal schedule, but
-it is not clear whether headway adherence can be improved with a schedule-based TSP
-regime. The research questions are therefore:
+In 2018, the Utah Transit Authority (UTA) launched the Utah Valley Express (UVX)
+Bus Rapid Transit (BRT) system in Provo and Orem, Utah. The system connects
+two commuter rail stations, two major universities (Brigham Young and Utah Valley),
+and commercial districts in Orem and Provo. UVX has TSP on X of the X traffic
+signals along its route. The TSP is triggered when a vehicle is behind its schedule;
+however, the system does not publish a schedule and rather attempts to maintain
+a specific headway (6 minutes in the peak period).
+
+The research questions are therefore:
 
 \begin{itemize}
 \tightlist
 \item
-  Does TSP improve headway adherence for rapid transit systems?
-\item
-  Does the improvement change by time of day or for particular portions of
-  a rapid transit route?
+  Does schedule-based TSP improve headway adherence for rapid transit systems?
 \item
   Is there an average improvement, or is there a reduction only in extreme delay?
+\item
+  Is there an improvement difference by time of day or for particular portions of
+  a rapid transit route?
 \end{itemize}
 
 \hypertarget{methods}{%
 \section{Methods}\label{methods}}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(tidyverse)}
-\end{Highlighting}
-\end{Shaded}
+UTA provided timepoint data for all trips on the UVX system for the entirety of
+2019. We calculated the headway between successive UVX trips at each stop, as
+well as the cumulative dwell time of all stations along the route. Because the
+UVX route loops around south Provo and stops at the Provo FrontRunner station
+twice, this created some minor difficulties in data processing, and we removed
+the timepoints on this portion of the route. We also limit our analysis to the
+period between 7 AM and 8 PM.
 
-\hypertarget{data}{%
-\subsection{Data}\label{data}}
+\begin{verbatim}
+## # A tibble: 4 x 5
+##   tperiod threshold start      end            n
+##     <int> <fct>     <date>     <date>     <int>
+## 1       0 5 min     2019-05-02 2019-06-06 43801
+## 2       0 2 min     2019-06-10 2019-08-29 70934
+## 3       0 No TSP    2019-07-15 2019-07-25 16312
+## 4       0 Always    2019-07-30 2019-08-08 16422
+\end{verbatim}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# this dataset was constructed from raw data using the script in R/datamaker.R}
-\CommentTok{# the processed data cannot be stored because it is too big for git}
-\NormalTok{uvx_time_points <-}\StringTok{ }\KeywordTok{read_rds}\NormalTok{(}\StringTok{"data/uvx_timepoints.rds"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+From January through June 6, the system operated with a 5-minute TSP threshold,.
+with TSP granted only if the vehicle was five or more minutes behind its
+scheduled timepoint. After August 12, the system switched to a 2-minute TSP
+threshold. During the summer, the TSP system was configured as follows for this
+experiment:
 
-In 2018, the Utah Transit Authority (UTA) launched a Bus Rapid Transit (BRT)
-system in Provo, Utah, United States. Known as the Utah Valley eXpress (UVX),
-the system was highly successful prior to the onset of the COVID-19 pandemic
-with more than 10,000 riders per average weekday {[}cite{]}. The system connects
-two commuter rail stations, two major universities (Brigham Young and Utah Valley),
-and commercial retail districts in Orem and Provo. The system includes X miles of
-dedicated lanes on its X-mile route, and 18 stations with a mix of center and side
-boarding, all at level floors. The system has been free for all riders since its
-opening.
+\begin{itemize}
+\tightlist
+\item
+  May 2 through June 6, 2019: 5 minute threshold
+\item
+  June 10 through July 12 and after August 12: 2 minute threshold
+\item
+  July 15 through July 26: no TSP
+\item
+  July 30 through August 9: TSP always activated
+\end{itemize}
 
-Bus Rapid Transit (BRT) systems are increasingly used by cities around the world
-due to their ability to address high passenger demand without exorbitant upfront
-costs. The cost savings come from the fact that BRTs operate on Right-of-Way
-category B (ROW-B) facilities with separated designated lanes that are subject
-to traffic control at intersections. In this way, buses have an unimpeded
-corridor on which to complete trips. However, the subjection to traffic control
-creates variability in the operating times of these systems, and several
-strategies have been developed and implemented to increase their reliability and
-operating times.One such strategy is the use of Transit Signal Priority (TSP),
-which alters priority at signalized intersections to provide for reduced running
-times between stops and a more even distribution of headways. In general, TSP
-seeks to improve operations by increasing the efficiency with which buses
-navigate signalized intersections, but it can be distinguished by a few classes
-\citep{DELGADO201528}:
+We discarded trips from January through April and September through December
+because the additional university passenger demand could interfere in the
+experiment and there were no tests of the ``None'' or ``Always'' TSP thresholds
+during the school year.
 
-1.Active or passive priority. Active priority involves timing adjustments made
-according to real-time data. Passive priority involves offline measures, such
-as optimized cycle lengths, based off of historical data.
+To evaluate the effect of changing TSP threshold on headway adherence, we
+consider two tests:
 
-2.Total, partial, or relative priority. In total priority, control actions such
-as phase jumping, phase insertion, green extension, or early termination of
-the red seek to create zero delay for buses. Partial priority limits control
-actions to those that provide less interruptions to other traffic, such as
-green extensions and early termination of the red. In relative priority, buses
-compete with general traffic at lights for priority.
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  A student's T-test of the mean headway deviation among trips during
+  different threshold periods. This is conducted with the \texttt{t.test()} function
+  in R \citep{R}.
+\item
+  A Kolmogorov-Smirnov test of the distribution of headway deviations,
+  conducted with the \texttt{ks.test()} function in R.
+\end{enumerate}
 
-3.Unconditional or conditional priority. Unconditional priority means buses
-receive priority at all times whereas conditional priority only provides buses
-with needed control measures when the buses are late.
-
-Adaptive signal priority involves real-time control adjustments made in order to
-optimize the throughput of both buses and general traffic,in which the delay of
-each is considered and a controller decides on a response most pertinent to the
-current traffic conditions. \citet{NI20201} compares adaptive signal priority with
-active and passive priority, whereas \citet{ALDEEK2017227} groups it with unconditional
-and conditional priority.
-
-Many studies have been done to determine the effects of various TSP strategies
-and configurations. In general, TSP strategies have been found to improve
-performance of transit systems such as BRT in a number of ways, including
-reduced delay, improved reliability, and mitigated effects on general traffic.
-
-\citet{ISHAQ2020946} used a set of trip data from a BRT system in Haifa, Israel to
-study the relation between service reliability, fleet management, and service
-utilization. They found that full and unconditional traffic signal priority
-given at all signals led to an 18\% reduction in total vehicle trip time and
-contributed to a 60\% reduction in the standard deviation of trip time.
-Similarly, \citet{ALDEEK2017227} found that compared to several other TSP strategies,
-BRT with unconditional TSP provided the best travel time, speed, number of
-stops, and delay enhancements but resulted in significant crossing street
-delays, especially at major intersections with high traffic demand. While the
-unconditionalTSP strategy was found effective in termsof the delay of the BRT
-system, concerns rise over the effects on side-street traffic if unconditional
-priority consistently gives right of way to the buses. \citet{Liu2018} clarified that
-``signal priorities are provided more efficiently and on a more informed basis,
-with fewer impacts on other traffic operations than the use of unconditional
-TSP.''The implementation of unconditional TSP may only be practical where
-crossing street volumes are low, and must reasonably be done in conjunction with
-studies of how non-transit traffic is effected, as each system's corridors have
-differing needs based off of demand and geometry.
-
-\citet{Liu2018} performed a study using transit operation data from a bus route found
-in Salt Lake County, Utah. A microscopic simulation was used to test GPS-based
-TSP scenarios. GPS-based TSP uses a GPS to achieve real-time (active) bus
-locating and advanced wireless communication technologies to achieve
-comprehensive analysis of operating information. Then a data-driven
-optimization method was implemented to understand the effects of flexible
-granting of signal priority across several models. They found that overall,
-BRT travel time decreased in all models where TSP was employed when compared
-to the base BRT model. \citet{ALDEEK2017227} also used simulation models to compare
-several scenarios. Using field data from a corridor in Orlando, Florida, they
-found that BRT with conditional TSP that was engaged when the buses were 3
-minutes behind experienced significantly improved travel times, average speed,
-and average total delay per vehicle, with minor effects on crossing street
-delays, when compared with BRT systems with no TSP or 5-minute conditional
-thresholds.These results indicate that TSP methods are effective in reducing
-delay. However, they ignore the important aspect of system reliability, which
-is critical to improving running times and maintaining ridership.
-
-\citet{YANG20151} performed a study of a pre-detective TSP strategy for BRT with active
-priority coordination between primary and secondary intersections using data
-from Changzhou, China. Using microscopic simulation, they tested three
-scenarios (traditional TSP, pre-detective TSP, and pre-detective TSP with
-coordination) against a no TSP base scenario. They found that pre-detective
-signal priority with coordination was most effective, with bus intersection
-delay decreasing by 67.4\% and headway adherence improving by about 40\% when
-compared with a no TSP strategy, while reducing normal traffic delay.
-
-\citet{DELGADO201528} studied station and interstation control jointly to determine an
-optimal control strategy for a single-service transit corridor applied to a
-high-frequency transit system, with the goal of evaluating effects over the
-whole corridor. A strategy of green extension with holding buses at stops was
-shown to produce a greater reduction in waiting times for users, as well as
-reducing variability and improving headway adherence.
-
-\citet{NI20201} performed a study of passive TSP control for a BRT system in Taichung,
-Taiwan. Microsimulation incorporated with a genetic algorithm was developed to
-coordinate signal offsets along an arterial with BRT operations, with the
-purpose of balancing improvements in BRT system delays and changes to LOS of
-other traffic. They found that passive TSP control can reduce approximately
-22\% of transit delay, with the smallest delay experienced in conjunction with
-a strategy of a three-minute scheduled headway. Additionally, the 3-minute
-departure headway scenario exhibited the best service reliability among the
-scenarios, with a headway stability near 100\%.
-
-These studies indicate the need to view BRT system performance in terms of both
-system delay and reliability. Especially when viewed across an entire system, it
-is possible for running times to remain consistent while reliability of
-individual buses is low. In particular, a bunching phenomenon may occur from a
-positive feedback loop of fluctuations in passenger demand and traffic
-conditions (\citet{DELGADO201528}).In scenarios where bunching is a problem, it may not
-be sufficient to base control strategies off of a schedule, rather on reliable
-operations. This may prove difficult in implementation. For instance,
-\citet{ISHAQ2020946} noted that the procurement agreement between the public transport
-authority in Israel and the incumbent operator implies that a schedule-based
-control strategy is required, as opposed to a headway-based (reliability-based)
-control strategy. However, when TSP control strategies are reliability-based,
-measures of reliability increase and the bunching phenomenon can be reduced.
-
-\citet{CATS2014223} performed a study of a regularity-driven operation scheme in
-Stockholm, Sweden to improve reliability and mitigate bus bunching. Using a
-series of field experiments and measuring performance with regularity
-indicators such as headway coefficient of variation, headway adherence, and
-average excess waiting time, he determined that a headway-based control
-strategy was effective in not only narrowing the headway distribution from the
-previous schedule-bases strategy, but also reducing waiting times, more evenly
-distributing dwell times, and maintaining running times. \citet{CHEN2012} also
-performed a headway-based study to measure the effects of real-time preventive
-operations control. They found that reliability is improved with lower
-permitted headway deviations and lower fluctuations of running times. When
-real-time information is used to predict service reliability and trigger
-preventive control, such as reduced dwell time and speed adjustments, bus
-bunching can be reduced.
-
-Both of these studies effectively demonstrate that solutions to bunching and
-other reliability-based operational problems are most effectively addressed
-through reliability-based control strategies. However, little has been done to
-evaluate the relationship between methods of TSP in a reliability-based control
-strategy. A study of TSP strategies with a focus on headway distribution could
-prove useful in gauging the benefits of TSP in a headway-based system, such as
-the UVX BRT system in Utah Valley.
+The data is pooled with We consider
 
 \hypertarget{findings}{%
 \section{Findings}\label{findings}}
+
+\includegraphics{uvx_headways_files/figure-latex/ecdf-1.pdf}
 
 \bibliography{book.bib}
 
 
 \end{document}
-
 
