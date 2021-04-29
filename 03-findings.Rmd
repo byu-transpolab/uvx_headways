@@ -30,14 +30,19 @@ coef_map <- c(
   "directionSB"   = "Southbound", 
   "periodAM Peak" = "AM Peak", 
   "periodPM Peak" = "PM Peak", 
-  "directionSB:periodAM Peak" = "Southbound \\times AM Peak",  
-  "directionSB:periodPM Peak" = "Southbound \\times PM Peak"
+  "directionSB:periodAM Peak" = "Southbound $\\times$ AM Peak",  
+  "directionSB:periodPM Peak" = "Southbound $\\times$ PM Peak"
 )
 
-modelsummary(models, coef_map = coef_map,
+f1 <- function(x) format(round(x, 3), big.mark=",")
+gm <- list(
+  list("raw" = "AIC", "clean" = "AIC", "fmt" = f1),
+  list("raw" = "logLik", "clean" = "Log Likelihood", "fmt" = f1)
+)
+
+modelsummary(models, coef_map = coef_map, gof_map = gm,
              estimate = "{estimate} ({statistic}){stars}",
              statistic = NULL, title = "85th Percentile Regression Estimates", 
-             gof_omit = "tau",
              notes = c("t-statistics in parentheses", "* p < 0.1, ** p < 0.05, *** p < 0.01"))
 ```
 

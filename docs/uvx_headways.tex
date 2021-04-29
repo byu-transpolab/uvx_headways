@@ -89,26 +89,22 @@
 \begin{frontmatter}
 
   \title{The Effect of Transit Signal Priority on Bus Rapid Transit Headway Adherence}
-    \author[Brigham Young University]{Gregory Macfarlane\corref{1}}
+    \author[BYU]{Gregory Macfarlane\corref{1}}
    \ead{gregmacfarlane@byu.edu} 
-    \author[Brigham Young University]{Grant Schultz}
+    \author[BYU]{Grant Schultz}
    \ead{gschultz@byu.edu} 
-    \author[WCEC]{Michael Sheffield}
-   \ead{cat@example.com} 
-    \author[Brigham Young University]{Logan Bennett}
-   \ead{cat@example.com} 
-      \address[Brigham Young University]{Civil and Environmental Engineering Department, 430 Engineering Building, Provo, Utah 84602}
-    \address[WCEC]{Some other place}
+    \author[WCG]{Michael Sheffield}
+   \ead{michael.sheffield@wcg.us} 
+    \author[BYU]{Logan Bennett}
+   \ead{loganbennett93@gmail.com} 
+      \address[BYU]{Brigham Young University, Civil and Environmental Engineering Department, 430 Engineering Building, Provo, Utah 84602}
+    \address[WCG]{Wall Consultant Group, 9980 S 300 W Ste 200 Sandy, UT 84070}
       \cortext[1]{Corresponding Author}
   
   \begin{abstract}
-  We report the results of an experiment to evaluate the impact of transit
-  signal priority (TSP) systems on headway adherence for a bus rapid transit (BRT) system
-  in Provo and Orem, Utah. The system will grant TSP if the bus is running behind
-  its unpublished schedule; the research question is whether TSP has an effect on
-  the headway between vehicles, which is what users perceive.
+  We report the results of an experiment to evaluate the impact of transit signal priority (TSP) on headway adherence for a bus rapid transit (BRT) system in Provo / Orem, Utah. The system grants TSP if the bus is running behind its unpublished schedule, but users perceive only a headway. In general, we find that more permissive TSP regimes modestly but significantly reduce the 85th percentile headway, controlling for directionality and time period. An inconsistent result gives that a strict TSP regime has a higher 85th percentile headway than not using TSP at all.
   \end{abstract}
-  
+   \begin{keyword} Public transit, Transit signal priority, Traffic operations\end{keyword}
  \end{frontmatter}
 
 \hypertarget{intro}{%
@@ -128,7 +124,7 @@ two commuter rail stations, two major universities (Brigham Young and Utah Valle
 and commercial districts in Orem and Provo. UVX has TSP on X of the X traffic
 signals along its route. The TSP is triggered when a vehicle is behind its schedule;
 however, the system does not publish a schedule and rather attempts to maintain
-a specific headway (6 minutes in the peak period).
+a specific headway (6 minutes in the peak period and 10 minutes in the off-peak).
 
 The research questions are therefore:
 
@@ -137,10 +133,10 @@ The research questions are therefore:
 \item
   Does schedule-based TSP improve headway adherence for rapid transit systems?
 \item
-  Is there an average improvement, or is there a reduction only in extreme delay?
+  Is there an average improvement, or is there a reduction in extreme delay?
 \item
-  Is there an improvement difference by time of day or for particular portions of
-  a rapid transit route?
+  Is there an improvement difference by time of day or for particular portions
+  of a rapid transit route?
 \end{itemize}
 
 \hypertarget{methods}{%
@@ -205,10 +201,6 @@ examine the edges of the distribution with a quantile regression model.
 \caption{\label{fig:ecdf}Cumulative probability distribution of headway deviation by threshold.}
 \end{figure}
 
-\begin{verbatim}
-## 'r2()' does not support models of class 'rq'.
-\end{verbatim}
-
 \begin{table}
 
 \caption{\label{tab:models}85th Percentile Regression Estimates}
@@ -224,14 +216,11 @@ TSP: Always & -0.100 (-1.800)* & -0.083 (-2.430)** & -0.100 (-2.562)** & -0.100 
 Southbound &  & 0.917 (42.553)*** &  & 0.883 (27.572)***\\
 AM Peak &  &  & -0.050 (-2.284)** & 0.000 (0.000)\\
 PM Peak &  &  & 0.617 (21.248)*** & 0.533 (11.790)***\\
-Southbound \textbackslash{}times AM Peak &  &  &  & -0.067 (-1.282)\\
-Southbound \textbackslash{}times PM Peak &  &  &  & -0.183 (-2.757)***\\
+Southbound \$\textbackslash{}times\$ AM Peak &  &  &  & -0.067 (-1.282)\\
+Southbound \$\textbackslash{}times\$ PM Peak &  &  &  & -0.183 (-2.757)***\\
 \midrule
-Num.Obs. & 157419 &  &  & \\
-AIC &  & 755372.3 & 759075.1 & 754484.1\\
-BIC &  & 755422.1 & 759134.9 & 754573.8\\
-Log.Lik. &  & -377681.135 & -379531.559 & -377233.029\\
-RMSE & 3.10 &  &  & \\
+AIC & 760,763.5 & 755,372.3 & 759,075.1 & 754,484.1\\
+Log Likelihood & -380,377.8 & -377,681.1 & -379,531.6 & -377,233\\
 \bottomrule
 \multicolumn{5}{l}{\textsuperscript{} t-statistics in parentheses}\\
 \multicolumn{5}{l}{\textsuperscript{} * p $<$ 0.1, ** p $<$ 0.05, *** p $<$ 0.01}\\
@@ -259,10 +248,12 @@ term between those two variables. With each additional control, the central
 findings related to TSP are unchanged in either magnitude or significance.
 
 The finding that a 5-minute TSP threshold appears to lengthen the headway
-relative to not using TSP at all is a curious finding, and we cannot immediately
-account for it. The experiment of which thresholds were engaged on which days
-was not randomized in any way, and it is possible that the results of this
-study are tied up in unaccounted seasonal variations.
+relative to not using TSP at all is curious, and we cannot immediately
+account for it. The schedule of threshold changes was not randomized in any way,
+and it is possible that the results of this study are tied up in unaccounted
+seasonal variations. In spite of this curious finding, we find that --- all else
+equal --- TSP marginally improves the headway adherence of late-running BRT
+vehicles.
 
 \bibliography{book.bib}
 

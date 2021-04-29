@@ -226,16 +226,20 @@ Figure 3.1: Cumulative probability distribution of headway deviation by threshol
 <span id="cb3-8"><a href="findings.html#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;directionSB&quot;</span>   <span class="ot">=</span> <span class="st">&quot;Southbound&quot;</span>, </span>
 <span id="cb3-9"><a href="findings.html#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;periodAM Peak&quot;</span> <span class="ot">=</span> <span class="st">&quot;AM Peak&quot;</span>, </span>
 <span id="cb3-10"><a href="findings.html#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;periodPM Peak&quot;</span> <span class="ot">=</span> <span class="st">&quot;PM Peak&quot;</span>, </span>
-<span id="cb3-11"><a href="findings.html#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;directionSB:periodAM Peak&quot;</span> <span class="ot">=</span> <span class="st">&quot;Southbound </span><span class="sc">\\</span><span class="st">times AM Peak&quot;</span>,  </span>
-<span id="cb3-12"><a href="findings.html#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;directionSB:periodPM Peak&quot;</span> <span class="ot">=</span> <span class="st">&quot;Southbound </span><span class="sc">\\</span><span class="st">times PM Peak&quot;</span></span>
+<span id="cb3-11"><a href="findings.html#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;directionSB:periodAM Peak&quot;</span> <span class="ot">=</span> <span class="st">&quot;Southbound $</span><span class="sc">\\</span><span class="st">times$ AM Peak&quot;</span>,  </span>
+<span id="cb3-12"><a href="findings.html#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;directionSB:periodPM Peak&quot;</span> <span class="ot">=</span> <span class="st">&quot;Southbound $</span><span class="sc">\\</span><span class="st">times$ PM Peak&quot;</span></span>
 <span id="cb3-13"><a href="findings.html#cb3-13" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb3-14"><a href="findings.html#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-15"><a href="findings.html#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(models, <span class="at">coef_map =</span> coef_map,</span>
-<span id="cb3-16"><a href="findings.html#cb3-16" aria-hidden="true" tabindex="-1"></a>             <span class="at">estimate =</span> <span class="st">&quot;{estimate} ({statistic}){stars}&quot;</span>,</span>
-<span id="cb3-17"><a href="findings.html#cb3-17" aria-hidden="true" tabindex="-1"></a>             <span class="at">statistic =</span> <span class="cn">NULL</span>, <span class="at">title =</span> <span class="st">&quot;85th Percentile Regression Estimates&quot;</span>, </span>
-<span id="cb3-18"><a href="findings.html#cb3-18" aria-hidden="true" tabindex="-1"></a>             <span class="at">gof_omit =</span> <span class="st">&quot;tau&quot;</span>,</span>
-<span id="cb3-19"><a href="findings.html#cb3-19" aria-hidden="true" tabindex="-1"></a>             <span class="at">notes =</span> <span class="fu">c</span>(<span class="st">&quot;t-statistics in parentheses&quot;</span>, <span class="st">&quot;* p &lt; 0.1, ** p &lt; 0.05, *** p &lt; 0.01&quot;</span>))</span></code></pre></div>
-<pre><code>## &#39;r2()&#39; does not support models of class &#39;rq&#39;.</code></pre>
+<span id="cb3-15"><a href="findings.html#cb3-15" aria-hidden="true" tabindex="-1"></a>f1 <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">format</span>(<span class="fu">round</span>(x, <span class="dv">3</span>), <span class="at">big.mark=</span><span class="st">&quot;,&quot;</span>)</span>
+<span id="cb3-16"><a href="findings.html#cb3-16" aria-hidden="true" tabindex="-1"></a>gm <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb3-17"><a href="findings.html#cb3-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="st">&quot;raw&quot;</span> <span class="ot">=</span> <span class="st">&quot;AIC&quot;</span>, <span class="st">&quot;clean&quot;</span> <span class="ot">=</span> <span class="st">&quot;AIC&quot;</span>, <span class="st">&quot;fmt&quot;</span> <span class="ot">=</span> f1),</span>
+<span id="cb3-18"><a href="findings.html#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="st">&quot;raw&quot;</span> <span class="ot">=</span> <span class="st">&quot;logLik&quot;</span>, <span class="st">&quot;clean&quot;</span> <span class="ot">=</span> <span class="st">&quot;Log Likelihood&quot;</span>, <span class="st">&quot;fmt&quot;</span> <span class="ot">=</span> f1)</span>
+<span id="cb3-19"><a href="findings.html#cb3-19" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-20"><a href="findings.html#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-21"><a href="findings.html#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(models, <span class="at">coef_map =</span> coef_map, <span class="at">gof_map =</span> gm,</span>
+<span id="cb3-22"><a href="findings.html#cb3-22" aria-hidden="true" tabindex="-1"></a>             <span class="at">estimate =</span> <span class="st">&quot;{estimate} ({statistic}){stars}&quot;</span>,</span>
+<span id="cb3-23"><a href="findings.html#cb3-23" aria-hidden="true" tabindex="-1"></a>             <span class="at">statistic =</span> <span class="cn">NULL</span>, <span class="at">title =</span> <span class="st">&quot;85th Percentile Regression Estimates&quot;</span>, </span>
+<span id="cb3-24"><a href="findings.html#cb3-24" aria-hidden="true" tabindex="-1"></a>             <span class="at">notes =</span> <span class="fu">c</span>(<span class="st">&quot;t-statistics in parentheses&quot;</span>, <span class="st">&quot;* p &lt; 0.1, ** p &lt; 0.05, *** p &lt; 0.01&quot;</span>))</span></code></pre></div>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:models">Table 3.1: </span>85th Percentile Regression Estimates
@@ -374,7 +378,7 @@ PM Peak
 </tr>
 <tr>
 <td style="text-align:left;">
-Southbound AM Peak
+Southbound <span class="math inline">\(\times\)</span> AM Peak
 </td>
 <td style="text-align:center;">
 </td>
@@ -388,7 +392,7 @@ Southbound AM Peak
 </tr>
 <tr>
 <td style="text-align:left;box-shadow: 0px 1px">
-Southbound PM Peak
+Southbound <span class="math inline">\(\times\)</span> PM Peak
 </td>
 <td style="text-align:center;box-shadow: 0px 1px">
 </td>
@@ -402,78 +406,36 @@ Southbound PM Peak
 </tr>
 <tr>
 <td style="text-align:left;">
-Num.Obs.
-</td>
-<td style="text-align:center;">
-157419
-</td>
-<td style="text-align:center;">
-</td>
-<td style="text-align:center;">
-</td>
-<td style="text-align:center;">
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 AIC
 </td>
 <td style="text-align:center;">
+760,763.5
 </td>
 <td style="text-align:center;">
-755372.3
+755,372.3
 </td>
 <td style="text-align:center;">
-759075.1
+759,075.1
 </td>
 <td style="text-align:center;">
-754484.1
+754,484.1
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-BIC
+Log Likelihood
 </td>
 <td style="text-align:center;">
+-380,377.8
 </td>
 <td style="text-align:center;">
-755422.1
+-377,681.1
 </td>
 <td style="text-align:center;">
-759134.9
+-379,531.6
 </td>
 <td style="text-align:center;">
-754573.8
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Log.Lik.
-</td>
-<td style="text-align:center;">
-</td>
-<td style="text-align:center;">
--377681.135
-</td>
-<td style="text-align:center;">
--379531.559
-</td>
-<td style="text-align:center;">
--377233.029
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-RMSE
-</td>
-<td style="text-align:center;">
-3.10
-</td>
-<td style="text-align:center;">
-</td>
-<td style="text-align:center;">
-</td>
-<td style="text-align:center;">
+-377,233
 </td>
 </tr>
 </tbody>
@@ -511,10 +473,12 @@ time period (operating in the PM peak lengthens the headway), and an interaction
 term between those two variables. With each additional control, the central
 findings related to TSP are unchanged in either magnitude or significance.</p>
 <p>The finding that a 5-minute TSP threshold appears to lengthen the headway
-relative to not using TSP at all is a curious finding, and we cannot immediately
-account for it. The experiment of which thresholds were engaged on which days
-was not randomized in any way, and it is possible that the results of this
-study are tied up in unaccounted seasonal variations.</p>
+relative to not using TSP at all is curious, and we cannot immediately
+account for it. The schedule of threshold changes was not randomized in any way,
+and it is possible that the results of this study are tied up in unaccounted
+seasonal variations. In spite of this curious finding, we find that — all else
+equal — TSP marginally improves the headway adherence of late-running BRT
+vehicles.</p>
 
 </div>
             </section>

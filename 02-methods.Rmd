@@ -3,6 +3,7 @@
 ```{r setup, include=FALSE}
 library(targets)
 library(tidyverse)
+library(quantreg)
 library(modelsummary)
 
 if(knitr::is_latex_output()){
