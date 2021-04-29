@@ -3,22 +3,22 @@ title: "The Effect of Transit Signal Priority on Bus Rapid Transit Headway Adher
 author:
   - name: Gregory Macfarlane
     email: gregmacfarlane@byu.edu
-    affiliation: Brigham Young University
+    affiliation: BYU
     footnote: 1
   - name: Grant Schultz
     email: gschultz@byu.edu
-    affiliation: Brigham Young University
+    affiliation: BYU
   - name: Michael Sheffield
-    email: cat@example.com
-    affiliation: WCEC
+    email: michael.sheffield@wcg.us
+    affiliation: WCG
   - name: Logan Bennett
-    email: cat@example.com
-    affiliation: Brigham Young University
+    email: loganbennett93@gmail.com
+    affiliation: BYU
 address:
-  - code: Brigham Young University
-    address: Civil and Environmental Engineering Department, 430 Engineering Building, Provo, Utah 84602
-  - code: WCEC
-    address: Some other place
+  - code: BYU
+    address: Brigham Young University, Civil and Environmental Engineering Department, 430 Engineering Building, Provo, Utah 84602
+  - code: WCG
+    address: Wall Consultant Group, 9980 S 300 W Ste 200 Sandy, UT 84070
 footnote:
   - code: 1
     text: "Corresponding Author"
@@ -28,14 +28,14 @@ documentclass: article
 journal: "Submitted to Transport Findings"
 bibliography: [book.bib]
 layout: "3p, authoryear, review"
+keywords:
+  - Public transit,
+  - Transit signal priority,
+  - Traffic operations
 biblio-style: apalike
 link-citations: yes
 abstract: |
-  We report the results of an experiment to evaluate the impact of transit 
-  signal priority (TSP) systems on headway adherence for a bus rapid transit (BRT) system
-  in Provo and Orem, Utah. The system will grant TSP if the bus is running behind
-  its unpublished schedule; the research question is whether TSP has an effect on
-  the headway between vehicles, which is what users perceive.
+  We report the results of an experiment to evaluate the impact of transit  signal priority (TSP) on headway adherence for a bus rapid transit (BRT) system in Provo / Orem, Utah. The system grants TSP if the bus is running behind its unpublished schedule, but users perceive only a headway. In general, we  find that more permissive TSP regimes modestly but significantly reduce  the 85th percentile headway, controlling for directionality and time period. An inconsistent result gives that a strict TSP regime has a higher 85th  percentile headway than not using TSP at all.
 description: "An analysis of headways on UVX responding to TSP"
 ---
 
@@ -55,13 +55,13 @@ two commuter rail stations, two major universities (Brigham Young and Utah Valle
 and commercial districts in Orem and Provo. UVX has TSP on X of the X traffic 
 signals along its route. The TSP is triggered when a vehicle is behind its schedule;
 however, the system does not publish a schedule and rather attempts to maintain
-a specific headway (6 minutes in the peak period).
+a specific headway (6 minutes in the peak period and 10 minutes in the off-peak).
 
 The research questions are therefore:
 
   - Does schedule-based TSP improve headway adherence for rapid transit systems?
-  - Is there an average improvement, or is there a reduction only in extreme delay?
-  - Is there an improvement difference by time of day or for particular portions of 
-  a rapid transit route?
+  - Is there an average improvement, or is there a reduction in extreme delay?
+  - Is there an improvement difference by time of day or for particular portions
+  of a rapid transit route?
 
 

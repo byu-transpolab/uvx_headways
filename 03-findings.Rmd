@@ -62,7 +62,9 @@ term between those two variables. With each additional control, the central
 findings related to TSP are unchanged in either magnitude or significance.
 
 The finding that a 5-minute TSP threshold appears to lengthen the headway 
-relative to not using TSP at all is a curious finding, and we cannot immediately
-account for it. The experiment of which thresholds were engaged on which days
-was not randomized in any way, and it is possible that the results of this 
-study are tied up in unaccounted seasonal variations.
+relative to not using TSP at all is curious, and we cannot immediately
+account for it. The schedule of threshold changes was not randomized in any way,
+and it is possible that the results of this study are tied up in unaccounted
+seasonal variations. In spite of this curious finding, we find that --- all else
+equal --- TSP marginally improves the headway adherence of late-running BRT
+vehicles.
