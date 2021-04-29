@@ -31,16 +31,14 @@ about the latter, but it is possible that an effect can be more clearly seen in
 headways and in a bus-bunching scenario.
 
 ## Building this document
-The document is built using bookdown for R, with code embedded in the document
+The document is built using `bookdown` for R, with code constructed using the
+`targets` package.
 text. To install the packages used in this analysis, run
 
 ```r
-install.packages(c("tidyverse", "lubridate"))
+install.packages(c("tidyverse", "lubridate", "targets", "quantreg"))
 ```
 
-The data for this study is stored in a collection of zipped CSV files in 
-the `data/UVX_Reliability_2019.csv.zip` file. An R script at `R/datamaker.R`
-constructs an rds file called `data/uvx_timepoints.rds` which is the starting
-point for this analysis; that is, you will need to run the `R/datamaker.R` script
-before you attempt to build the document.
+Then, you can run `targets::tar_make()` to construct the analysis and then use
+Rstudio to build the website. Building the paper requires a LaTeX installation.
 
