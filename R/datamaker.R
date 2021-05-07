@@ -65,6 +65,7 @@ clean_data <- function(timepoint_data){
 #' Calculate headway information
 #' 
 #' @param cleaned_data timepoint data that has been cleaned and filtered.
+#' @return cleaned data, but with computed headways.
 calculate_headways <- function(cleaned_data){
   cleaned_data %>%
     # This is a test filter that has come in handy

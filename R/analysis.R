@@ -23,7 +23,7 @@ get_period_change <- function(headways){
 make_ecdf <- function(headways){
   headways %>% 
     ggplot(aes(x = as.numeric(discrepancy) / 60, color = threshold)) +
-    stat_ecdf() +
+    geom_density() +
     coord_cartesian(xlim = c(-5, 6))
 }
 
