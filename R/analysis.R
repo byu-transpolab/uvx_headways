@@ -61,22 +61,26 @@ p85_discrepancy <- function(headways){
 qr_estimate <- function(headways){
   data <- headways %>%
     mutate(
-      discrepancy = as.numeric(discrepancy)/60,
+      hw_actl = as.numeric(hw_actl)/60,
       period = factor(period),
       period = fct_relevel(period, "Off Peak")
     )
-  qfit_thold <- rq(hw_actl ~ threshold, tau = 0.85, data = data)
-  qfit_dir <- update(qfit_thold, .~. + direction)
-  qfit_pk  <- update(qfit_thold, .~. + period)
-  qfit_dirpk <- update(qfit_thold, .~. + direction*period)
   
   
-  list(
-    "Threshold" = qfit_thold,
-    "Direction" = qfit_dir,
-    "Peak" = qfit_pk,
-    "All"  = qfit_dirpk
-  )
+  models <- lapply(c(0.15, 0.85), function(tau) {
+    qfit_thold <-  rq(hw_actl ~ threshold, tau = tau, data = data) 
+    
+    list(
+      "Threshold" = qfit_thold,
+      "Direction" = update(qfit_thold, .~. + direction),
+      "Peak" = update(qfit_thold, .~. + period),
+      "All" = update(qfit_thold, .~. + direction*period)
+    )
+  }) 
+  
+  names(models) <- c("0.15", "0.85")
+  models
+    
 }
 
 
