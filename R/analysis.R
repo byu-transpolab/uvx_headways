@@ -22,9 +22,9 @@ get_period_change <- function(headways){
 #' @return a ggplot2 object
 make_ecdf <- function(headways){
   headways %>% 
-    ggplot(aes(x = as.numeric(discrepancy) / 60, color = threshold)) +
-    geom_density() +
-    coord_cartesian(xlim = c(-5, 6))
+    ggplot(aes(x = as.numeric(hw_actl) / 60, color = threshold)) +
+    stat_ecdf() +
+    coord_cartesian(xlim = c(0, 10))
 }
 
 #' Calculate average discrepancy by group
@@ -65,7 +65,7 @@ qr_estimate <- function(headways){
       period = factor(period),
       period = fct_relevel(period, "Off Peak")
     )
-  qfit_thold <- rq(discrepancy ~ threshold, tau = 0.85, data = data)
+  qfit_thold <- rq(hw_actl ~ threshold, tau = 0.85, data = data)
   qfit_dir <- update(qfit_thold, .~. + direction)
   qfit_pk  <- update(qfit_thold, .~. + period)
   qfit_dirpk <- update(qfit_thold, .~. + direction*period)
