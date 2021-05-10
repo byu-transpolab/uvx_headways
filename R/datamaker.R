@@ -82,7 +82,7 @@ calculate_headways <- function(cleaned_data){
       discrepancy = hw_schd - hw_actl # difference between actual and scheduled hw
     ) %>%
     # only keep trips from when we're running at 6-minute headways
-    filter(hw_schd %in% c(360, 600)) %>%
+    filter(hw_schd %in% c(360)) %>%
     # Now, group by direction and trip to calculate cumulative dwell time
     group_by(direction, trip, date) %>%
     arrange(time, .by_group = TRUE) %>%
