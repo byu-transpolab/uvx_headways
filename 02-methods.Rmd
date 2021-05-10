@@ -22,27 +22,27 @@ well as the cumulative dwell time of all stations along the route. Because the
 UVX route loops around south Provo and stops at the Provo FrontRunner station
 twice, this created some minor difficulties in data processing, and we removed
 the timepoints on this portion of the route. We also limit our analysis to the
-period between 7 AM and 8 PM.
+periods between 7 AM and 8 PM when the system runs at a 6-minute headway. 
+Timepoints within these period are considered "AM Peak" if occurring between
+7 and 9 AM, or "PM Peak" between 4 and 6 PM.
 
 ```{r times, eval = FALSE}
 tar_load(period_change_table)
 period_change_table
 ```
 
-From January through June 6, the system operated with a 5-minute TSP threshold,.
-with TSP granted only if the vehicle was five or more minutes behind its
-scheduled timepoint. After August 12, the system switched to a 2-minute TSP
-threshold. During the summer, the TSP system was configured as follows for this
-experiment:
+From January through June 6, the system operated with a 5-minute TSP request threshold
+due to an erroneous system configuration; these timepoints were discarded. After
+August 12, the system switched to a 2-minute TSP threshold. During the summer,
+the TSP system was configured as follows for this experiment:
 
--   May 2 through June 6, 2019: 5 minute threshold
 -   June 10 through July 12 and after August 12: 2 minute threshold
 -   July 15 through July 26: no TSP
 -   July 30 through August 9: TSP always activated
 
-We discarded trips from January through April and September through December
-because the additional university passenger demand could interfere in the
-experiment and there were no tests of the "None" or "Always" TSP thresholds
+We also discarded trips from January through April and September through
+December because the additional university passenger demand could interfere in
+the experiment and there were no tests of the "None" or "Always" TSP thresholds
 during the school year.
 
 Standard statistical tests --- such as the student's $t$-test or 
@@ -50,7 +50,9 @@ ordinary least squares regression models --- are designed to ascertain the
 significance of a statistic at the *mean* of the distribution. In this
 application, we are less concerned with the mean deviation in headway, and are
 instead interested in whether TSP is able to reduce the lateness of buses that
-already have substantial deviation from their programmed headway. Consequently,
-we employ conditional quantile regression [@koenker2001quantile] to estimate the
-effect of TSP on headway deviation at the 85th percentile of the distribution.
-This is done with the `quantreg` package for R [@quantreg; @R]
+already have substantial deviation from their programmed headway. Further, a bus
+that is delayed from its intended headway may shorten the subsequent headway due
+to "bunching." Consequently, we employ conditional quantile regression
+[@koenker2001quantile] to estimate the effect of TSP on headway deviation at the
+15th and 85th percentiles of the distribution. This is done with the `quantreg`
+package for R [@quantreg; @R]
