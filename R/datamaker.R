@@ -43,6 +43,7 @@ clean_data <- function(timepoint_data){
       threshold = factor(Threshold, levels = c("OFF", "5", "2", "ON"), 
                          labels = c("No TSP", "5 min", "2 min", "Always"))
     ) %>%
+    filter(threshold != "5 min") %>%
     filter(!is.na(threshold)) %>%
     
     # remove dates during the school year
