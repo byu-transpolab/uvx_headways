@@ -6,6 +6,9 @@ library(tidyverse)
 library(quantreg)
 library(modelsummary)
 
+knitr::knit_hooks$set(
+  inline = function(x) if (is.numeric(x) ) format(round(x, 3), big.mark = ",")
+)
 if(knitr::is_latex_output()){
   knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 }
