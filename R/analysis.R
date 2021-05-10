@@ -23,8 +23,7 @@ get_period_change <- function(headways){
 make_ecdf <- function(headways){
   headways %>% 
     ggplot(aes(x = as.numeric(hw_actl) / 60, color = threshold)) +
-    stat_ecdf() +
-    coord_cartesian(xlim = c(0, 10))
+    stat_ecdf() 
 }
 
 #' Calculate average discrepancy by group
