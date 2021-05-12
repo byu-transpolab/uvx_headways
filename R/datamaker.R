@@ -88,7 +88,7 @@ calculate_headways <- function(cleaned_data){
     group_by(direction, trip, date) %>%
     arrange(time, .by_group = TRUE) %>%
     mutate(
-      cumdwell = cumsum(as.numeric(dwell))
+      cumdwell = cumsum(as.numeric(dwell) / 60)
     )
 }
 
