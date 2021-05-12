@@ -52,16 +52,24 @@ when the bus is otherwise on schedule [@NI20201].
 In 2018, the Utah Transit Authority (UTA) launched the Utah Valley Express (UVX) 
 Bus Rapid Transit (BRT) system in Provo and Orem, Utah.  The system connects
 two commuter rail stations, two major universities (Brigham Young and Utah Valley),
-and commercial districts in Orem and Provo. UVX has TSP on X of the X traffic 
-signals along its route. The TSP is triggered when a vehicle is behind its schedule;
-however, the system does not publish a schedule and rather attempts to maintain
-a specific headway (6 minutes in the peak period and 10 minutes in the off-peak).
+and commercial districts in Orem and Provo. UVX has TSP on 44 of the 47 traffic 
+signals along its route. A transit vehicle requests TSP the vehicle is behind its
+schedule; the signal controller may then grant the TSP based on a set of rules. 
+For example, the signal will not grant TSP to transit vehicles traveling in the 
+same direction in consecutive signal cycles. Specifically, at least two "clean" cycles
+must run before the signal controller will grant TSP again.
 
+Though the TSP system is based on a schedule, UTA does not publish a schedule
+for UVX. Instead informed that a bus will arrive on a specific
+headway: 6 minutes in the peak period and 10 minutes in the off-peak. UVX vehicles depart
+their initial time point on this schedule, but then proceed to the end of the route 
+without consideration as to whether the vehicle is running ahead or behind its "schedule"
+as understood by the TSP system. It is
+unclear whether the actualized headway is affected by a schedule-based TSP
+system, potentially creating frustration for riders or inefficient operations. 
 The research questions are therefore:
 
   - Does schedule-based TSP improve headway adherence for rapid transit systems?
-  - Is there an average improvement, or is there a reduction in extreme delay?
-  - Is there an improvement difference by time of day or for particular portions
-  of a rapid transit route?
+  - What other factors influence headway adherence: direction, dwell time, etc.?
 
 
