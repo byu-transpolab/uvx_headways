@@ -45,7 +45,7 @@ Transit signal priority (TSP) allows traffic signals to flexibly accommodate
 transit vehicles. This may involve extending a green phase until the vehicle
 passes, triggering an early green if there is a vehicle waiting at the light, or
 even running specific transit-only phases. TSP helps transit vehicles maintain
-on-time performance [@Liu2018], but often TSP will only engage at a signal if
+on-time performance [@sheffieldsensitivity; @Liu2018], but often TSP will only engage at a signal if
 the vehicle is running behind its schedule, thus minimizing automobile delay
 when the bus is otherwise on schedule [@NI20201].
 
