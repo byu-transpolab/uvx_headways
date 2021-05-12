@@ -23,7 +23,7 @@
 
 
 
-<meta name="date" content="2021-04-28" />
+<meta name="date" content="2021-05-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="methods.html"/>
-<link rel="next" href="references.html"/>
+
 <style type="text/css">
 p.abstract{
   text-align: center;
@@ -173,7 +173,6 @@ div.csl-indent {
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Questions</a></li>
 <li class="chapter" data-level="2" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>2</b> Methods</a></li>
 <li class="chapter" data-level="3" data-path="findings.html"><a href="findings.html"><i class="fa fa-check"></i><b>3</b> Findings</a></li>
-<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -197,19 +196,24 @@ div.csl-indent {
 <div id="findings" class="section level1" number="3">
 <h1><span class="header-section-number"> 3</span> Findings</h1>
 <p>Figure <a href="findings.html#fig:ecdf">3.1</a> shows the empirical cumulative density function for the
-headway deviation data, grouped by TSP threshold. Visually, the difference
-between the various threshold settings is not dramatic. The 5-minute
-threshold appears to have slightly more vehicles arrive ahead of the
-scheduled headway, and slightly fewer arrive behind it, than the other three
-threshold groups. The median and average of the distribution for all four
-thresholds is remarkably similar, and strengthens our determination to
-examine the edges of the distribution with a quantile regression model.</p>
+headway deviation data, grouped by TSP threshold. Note that a “perfect”
+headway distribution, where all vehicles maintain the exactly intended headway,
+would be step function with a vertical transition at six minutes.
+Visually, the difference between the various threshold settings is not dramatic.
+The 2-minute threshold appears to have slightly more vehicles arrive behind the
+scheduled headway (6 minutes), and slightly more arrive before it, than the
+other two threshold groups. The median of the distribution for all
+four thresholds is remarkably similar and is just a few seconds behind the target
+headway. This observation strengthens our determination to examine the sides of
+the distribution — rather than its center — with a quantile regression model.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="findings.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_load</span>(ecdf)</span>
 <span id="cb2-2"><a href="findings.html#cb2-2" aria-hidden="true" tabindex="-1"></a>ecdf <span class="sc">+</span> </span>
-<span id="cb2-3"><a href="findings.html#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Deviation between scheduled and actual timepoint [minutes]&quot;</span>) <span class="sc">+</span></span>
+<span id="cb2-3"><a href="findings.html#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Actual Headway [minutes]&quot;</span>) <span class="sc">+</span></span>
 <span id="cb2-4"><a href="findings.html#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Cumulative Probability&quot;</span>) <span class="sc">+</span></span>
 <span id="cb2-5"><a href="findings.html#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_discrete</span>(<span class="st">&quot;TSP Threshold&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb2-6"><a href="findings.html#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.15</span>, <span class="fl">0.5</span>, <span class="fl">0.85</span>, <span class="dv">1</span>))</span></code></pre></div>
+<span id="cb2-6"><a href="findings.html#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">12</span>)) <span class="sc">+</span></span>
+<span id="cb2-7"><a href="findings.html#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>, <span class="fl">0.15</span>, <span class="fl">0.5</span>, <span class="fl">0.85</span>, <span class="fl">0.9</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb2-8"><a href="findings.html#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">6</span>, <span class="dv">9</span>, <span class="dv">12</span>))</span></code></pre></div>
 <div class="figure"><span id="fig:ecdf"></span>
 <img src="uvx_headways_files/figure-html/ecdf-1.png" alt="Cumulative probability distribution of headway deviation by threshold." width="672" />
 <p class="caption">
@@ -220,12 +224,12 @@ Figure 3.1: Cumulative probability distribution of headway deviation by threshol
 <span id="cb3-2"><a href="findings.html#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="findings.html#cb3-3" aria-hidden="true" tabindex="-1"></a>coef_map <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
 <span id="cb3-4"><a href="findings.html#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;(Intercept)&quot;</span> <span class="ot">=</span> <span class="st">&quot;(Intercept)&quot;</span>, </span>
-<span id="cb3-5"><a href="findings.html#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;threshold5 min&quot;</span> <span class="ot">=</span> <span class="st">&quot;TSP: 5 minutes&quot;</span>,</span>
-<span id="cb3-6"><a href="findings.html#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;threshold2 min&quot;</span> <span class="ot">=</span>  <span class="st">&quot;TSP: 2 minutes&quot;</span>,</span>
-<span id="cb3-7"><a href="findings.html#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;thresholdAlways&quot;</span> <span class="ot">=</span> <span class="st">&quot;TSP: Always&quot;</span>,</span>
-<span id="cb3-8"><a href="findings.html#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;directionSB&quot;</span>   <span class="ot">=</span> <span class="st">&quot;Southbound&quot;</span>, </span>
-<span id="cb3-9"><a href="findings.html#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;periodAM Peak&quot;</span> <span class="ot">=</span> <span class="st">&quot;AM Peak&quot;</span>, </span>
-<span id="cb3-10"><a href="findings.html#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;periodPM Peak&quot;</span> <span class="ot">=</span> <span class="st">&quot;PM Peak&quot;</span>, </span>
+<span id="cb3-5"><a href="findings.html#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;threshold2 min&quot;</span> <span class="ot">=</span>  <span class="st">&quot;TSP: 2 minutes&quot;</span>,</span>
+<span id="cb3-6"><a href="findings.html#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;thresholdAlways&quot;</span> <span class="ot">=</span> <span class="st">&quot;TSP: Always&quot;</span>,</span>
+<span id="cb3-7"><a href="findings.html#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;directionSB&quot;</span>   <span class="ot">=</span> <span class="st">&quot;Southbound&quot;</span>, </span>
+<span id="cb3-8"><a href="findings.html#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;periodAM Peak&quot;</span> <span class="ot">=</span> <span class="st">&quot;AM Peak&quot;</span>, </span>
+<span id="cb3-9"><a href="findings.html#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;periodPM Peak&quot;</span> <span class="ot">=</span> <span class="st">&quot;PM Peak&quot;</span>, </span>
+<span id="cb3-10"><a href="findings.html#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;cumdwell&quot;</span> <span class="ot">=</span> <span class="st">&quot;Cumulative Dwell [minutes]&quot;</span>, </span>
 <span id="cb3-11"><a href="findings.html#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;directionSB:periodAM Peak&quot;</span> <span class="ot">=</span> <span class="st">&quot;Southbound $</span><span class="sc">\\</span><span class="st">times$ AM Peak&quot;</span>,  </span>
 <span id="cb3-12"><a href="findings.html#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;directionSB:periodPM Peak&quot;</span> <span class="ot">=</span> <span class="st">&quot;Southbound $</span><span class="sc">\\</span><span class="st">times$ PM Peak&quot;</span></span>
 <span id="cb3-13"><a href="findings.html#cb3-13" aria-hidden="true" tabindex="-1"></a>)</span>
@@ -234,31 +238,53 @@ Figure 3.1: Cumulative probability distribution of headway deviation by threshol
 <span id="cb3-16"><a href="findings.html#cb3-16" aria-hidden="true" tabindex="-1"></a>gm <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
 <span id="cb3-17"><a href="findings.html#cb3-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="st">&quot;raw&quot;</span> <span class="ot">=</span> <span class="st">&quot;AIC&quot;</span>, <span class="st">&quot;clean&quot;</span> <span class="ot">=</span> <span class="st">&quot;AIC&quot;</span>, <span class="st">&quot;fmt&quot;</span> <span class="ot">=</span> f1),</span>
 <span id="cb3-18"><a href="findings.html#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="st">&quot;raw&quot;</span> <span class="ot">=</span> <span class="st">&quot;logLik&quot;</span>, <span class="st">&quot;clean&quot;</span> <span class="ot">=</span> <span class="st">&quot;Log Likelihood&quot;</span>, <span class="st">&quot;fmt&quot;</span> <span class="ot">=</span> f1)</span>
-<span id="cb3-19"><a href="findings.html#cb3-19" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb3-20"><a href="findings.html#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-21"><a href="findings.html#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(models, <span class="at">coef_map =</span> coef_map, <span class="at">gof_map =</span> gm,</span>
-<span id="cb3-22"><a href="findings.html#cb3-22" aria-hidden="true" tabindex="-1"></a>             <span class="at">estimate =</span> <span class="st">&quot;{estimate} ({statistic}){stars}&quot;</span>,</span>
-<span id="cb3-23"><a href="findings.html#cb3-23" aria-hidden="true" tabindex="-1"></a>             <span class="at">statistic =</span> <span class="cn">NULL</span>, <span class="at">title =</span> <span class="st">&quot;85th Percentile Regression Estimates&quot;</span>, </span>
-<span id="cb3-24"><a href="findings.html#cb3-24" aria-hidden="true" tabindex="-1"></a>             <span class="at">notes =</span> <span class="fu">c</span>(<span class="st">&quot;t-statistics in parentheses&quot;</span>, <span class="st">&quot;* p &lt; 0.1, ** p &lt; 0.05, *** p &lt; 0.01&quot;</span>))</span></code></pre></div>
-<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<span id="cb3-19"><a href="findings.html#cb3-19" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>Models estimating the headway effects of TSP requesting threshold and other factors
+at an array of distribution quantiles are given in Table <a href="findings.html#tab:models-summ">3.1</a>.
+In these models, the “(Intercept)” represents the expected headway at that percentile
+before considering additional information. For example, the 10th-percentile headway
+is 4.649 minutes, all else equal. The other
+coefficients in the models modify this average headway. Almost all coefficients are
+significant, and many serve to widen the headway distribution.
+Buses traveling in the PM peak, for example, have a significantly higher
+90th-percentile headway and a lower 10th-percentile headway. Buses traveling in the
+southbound direction also have a wider headway distribution than those in the
+northbound direction, and an additional minute of cumulative dwell time widens the
+the headway distribution.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="findings.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(</span>
+<span id="cb4-2"><a href="findings.html#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lapply</span>(models, <span class="cf">function</span>(x) x<span class="sc">$</span>All) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-3"><a href="findings.html#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set_names</span>(<span class="fu">str_c</span>(<span class="fu">as.numeric</span>(<span class="fu">names</span>(models)) <span class="sc">*</span> <span class="dv">100</span>, <span class="st">&quot;th&quot;</span>)),</span>
+<span id="cb4-4"><a href="findings.html#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">coef_map =</span> coef_map, <span class="at">gof_map =</span> gm,</span>
+<span id="cb4-5"><a href="findings.html#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">estimate =</span> <span class="st">&quot;{estimate} ({statistic}){stars}&quot;</span>,</span>
+<span id="cb4-6"><a href="findings.html#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">statistic =</span> <span class="cn">NULL</span>, <span class="at">title =</span> <span class="st">&quot;Quantile Regression Estimates&quot;</span>, </span>
+<span id="cb4-7"><a href="findings.html#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">notes =</span> <span class="fu">c</span>(<span class="st">&quot;t-statistics in parentheses, * p &lt; 0.1, ** p &lt; 0.05, *** p &lt; 0.01&quot;</span>,</span>
+<span id="cb4-8"><a href="findings.html#cb4-8" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;Coefficients represent change to expected headway in minutes.&quot;</span>),</span>
+<span id="cb4-9"><a href="findings.html#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">escape=</span><span class="cn">FALSE</span></span>
+<span id="cb4-10"><a href="findings.html#cb4-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb4-11"><a href="findings.html#cb4-11" aria-hidden="true" tabindex="-1"></a>   <span class="fu">kable_styling</span>(<span class="at">latex_options =</span> <span class="fu">c</span>(<span class="st">&quot;scale_down&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-12"><a href="findings.html#cb4-12" aria-hidden="true" tabindex="-1"></a>   <span class="fu">landscape</span>()</span></code></pre></div>
+<table class="table table" style="width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:models">Table 3.1: </span>85th Percentile Regression Estimates
+<span id="tab:models-summ">Table 3.1: </span>Quantile Regression Estimates
 </caption>
 <thead>
 <tr>
 <th style="text-align:left;">
 </th>
 <th style="text-align:center;">
-Threshold
+10th
 </th>
 <th style="text-align:center;">
-Direction
+15th
 </th>
 <th style="text-align:center;">
-Peak
+50th
 </th>
 <th style="text-align:center;">
-All
+85th
+</th>
+<th style="text-align:center;">
+90th
 </th>
 </tr>
 </thead>
@@ -268,33 +294,19 @@ All
 (Intercept)
 </td>
 <td style="text-align:center;">
-2.067 (46.600)***
+4.649 (108.947)***
 </td>
 <td style="text-align:center;">
-1.683 (65.528)***
+4.922 (131.183)***
 </td>
 <td style="text-align:center;">
-1.967 (57.740)***
+6.338 (174.147)***
 </td>
 <td style="text-align:center;">
-1.650 (68.493)***
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-TSP: 5 minutes
+7.410 (187.349)***
 </td>
 <td style="text-align:center;">
-0.300 (5.846)***
-</td>
-<td style="text-align:center;">
-0.200 (6.113)***
-</td>
-<td style="text-align:center;">
-0.233 (5.853)***
-</td>
-<td style="text-align:center;">
-0.167 (5.579)***
+7.598 (209.077)***
 </td>
 </tr>
 <tr>
@@ -302,16 +314,19 @@ TSP: 5 minutes
 TSP: 2 minutes
 </td>
 <td style="text-align:center;">
--0.117 (-2.467)**
+0.190 (5.234)***
 </td>
 <td style="text-align:center;">
--0.067 (-2.433)**
+0.168 (4.880)***
 </td>
 <td style="text-align:center;">
--0.117 (-3.569)***
+-0.013 (-0.400)
 </td>
 <td style="text-align:center;">
--0.083 (-3.366)***
+-0.186 (-5.346)***
+</td>
+<td style="text-align:center;">
+-0.178 (-5.399)***
 </td>
 </tr>
 <tr>
@@ -319,16 +334,19 @@ TSP: 2 minutes
 TSP: Always
 </td>
 <td style="text-align:center;">
--0.100 (-1.800)*
+0.093 (2.033)**
 </td>
 <td style="text-align:center;">
--0.083 (-2.430)**
+0.101 (2.479)**
 </td>
 <td style="text-align:center;">
--0.100 (-2.562)**
+0.001 (0.018)
 </td>
 <td style="text-align:center;">
--0.100 (-2.849)***
+-0.218 (-4.650)***
+</td>
+<td style="text-align:center;">
+-0.132 (-2.835)***
 </td>
 </tr>
 <tr>
@@ -336,14 +354,19 @@ TSP: Always
 Southbound
 </td>
 <td style="text-align:center;">
+-0.921 (-21.746)***
 </td>
 <td style="text-align:center;">
-0.917 (42.553)***
+-0.604 (-17.391)***
 </td>
 <td style="text-align:center;">
+-0.161 (-4.591)***
 </td>
 <td style="text-align:center;">
-0.883 (27.572)***
+0.752 (21.580)***
+</td>
+<td style="text-align:center;">
+0.861 (26.837)***
 </td>
 </tr>
 <tr>
@@ -351,14 +374,19 @@ Southbound
 AM Peak
 </td>
 <td style="text-align:center;">
+-0.160 (-5.148)***
 </td>
 <td style="text-align:center;">
+-0.114 (-3.578)***
 </td>
 <td style="text-align:center;">
--0.050 (-2.284)**
+0.075 (2.973)***
 </td>
 <td style="text-align:center;">
-0.000 (0.000)
+-0.068 (-1.211)
+</td>
+<td style="text-align:center;">
+0.112 (3.453)***
 </td>
 </tr>
 <tr>
@@ -366,14 +394,39 @@ AM Peak
 PM Peak
 </td>
 <td style="text-align:center;">
+-0.444 (-8.855)***
 </td>
 <td style="text-align:center;">
+-0.204 (-4.895)***
 </td>
 <td style="text-align:center;">
-0.617 (21.248)***
+-0.401 (-6.218)***
 </td>
 <td style="text-align:center;">
-0.533 (11.790)***
+0.380 (9.390)***
+</td>
+<td style="text-align:center;">
+0.461 (12.282)***
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Cumulative Dwell [minutes]
+</td>
+<td style="text-align:center;">
+-0.205 (-44.282)***
+</td>
+<td style="text-align:center;">
+-0.175 (-33.066)***
+</td>
+<td style="text-align:center;">
+-0.041 (-8.505)***
+</td>
+<td style="text-align:center;">
+0.105 (15.956)***
+</td>
+<td style="text-align:center;">
+0.161 (31.324)***
 </td>
 </tr>
 <tr>
@@ -381,13 +434,19 @@ PM Peak
 Southbound <span class="math inline">\(\times\)</span> AM Peak
 </td>
 <td style="text-align:center;">
+0.004 (0.063)
 </td>
 <td style="text-align:center;">
+-0.067 (-1.144)
 </td>
 <td style="text-align:center;">
+0.141 (2.876)***
 </td>
 <td style="text-align:center;">
--0.067 (-1.282)
+0.415 (6.201)***
+</td>
+<td style="text-align:center;">
+0.257 (4.611)***
 </td>
 </tr>
 <tr>
@@ -395,13 +454,19 @@ Southbound <span class="math inline">\(\times\)</span> AM Peak
 Southbound <span class="math inline">\(\times\)</span> PM Peak
 </td>
 <td style="text-align:center;box-shadow: 0px 1px">
+0.285 (4.076)***
 </td>
 <td style="text-align:center;box-shadow: 0px 1px">
+-0.286 (-5.420)***
 </td>
 <td style="text-align:center;box-shadow: 0px 1px">
+-0.003 (-0.032)
 </td>
 <td style="text-align:center;box-shadow: 0px 1px">
--0.183 (-2.757)***
+-0.171 (-2.371)**
+</td>
+<td style="text-align:center;box-shadow: 0px 1px">
+-0.157 (-2.470)**
 </td>
 </tr>
 <tr>
@@ -409,16 +474,19 @@ Southbound <span class="math inline">\(\times\)</span> PM Peak
 AIC
 </td>
 <td style="text-align:center;">
-760,763.5
+321,907.1
 </td>
 <td style="text-align:center;">
-755,372.3
+314,210.7
 </td>
 <td style="text-align:center;">
-759,075.1
+301,346.1
 </td>
 <td style="text-align:center;">
-754,484.1
+325,312.4
+</td>
+<td style="text-align:center;">
+336,009.8
 </td>
 </tr>
 <tr>
@@ -426,68 +494,82 @@ AIC
 Log Likelihood
 </td>
 <td style="text-align:center;">
--380,377.8
+-160,944.5
 </td>
 <td style="text-align:center;">
--377,681.1
+-157,096.3
 </td>
 <td style="text-align:center;">
--379,531.6
+-150,664
 </td>
 <td style="text-align:center;">
--377,233
+-162,647.2
+</td>
+<td style="text-align:center;">
+-167,995.9
 </td>
 </tr>
 </tbody>
 <tfoot>
 <tr>
 <td style="padding: 0; border:0;" colspan="100%">
-<sup></sup> * p &lt; 0.1, ** p &lt; 0.05, *** p &lt; 0.01
+<sup></sup> Coefficients represent change to expected headway in minutes.
 </td>
 </tr>
 </tfoot>
 <tfoot>
 <tr>
 <td style="padding: 0; border:0;" colspan="100%">
-<sup></sup> t-statistics in parentheses
+<sup></sup> t-statistics in parentheses, * p &lt; 0.1, ** p &lt; 0.05, *** p &lt; 0.01
 </td>
 </tr>
 </tfoot>
 </table>
-<p>Table <a href="findings.html#tab:models">3.1</a> presents the estimates of four models with an array
-of explanatory variables. In the model labeled “Threshold,” each TSP threshold
-is controlled for with a dummy variable; the intercept term suggests that the
-85th percentile bus arrives with a headway 2.0666667
-minutes longer than it was supposed to have. The three threshold dummies are
-each significant, though the ordering of the coefficients is somewhat unintuitive.
-Relative to the situation with no TSP, making TSP always available reduces the
-headway of the 85th percentile bus by 0.1
-minutes, and engaging TSP at a 2-minute threshold reduces the headway by
-0.1166667. What is not intuitive is that
-engaging TSP with a 5-minute threshold actually makes the 85th percentile
-headway -0.3 minutes <em>longer</em> than
-not using it at all.</p>
-<p>The other three models in Table <a href="findings.html#tab:models">3.1</a> control for the direction
-of the service (southbound buses from Orem to Provo have a longer headway), the
-time period (operating in the PM peak lengthens the headway), and an interaction
-term between those two variables. With each additional control, the central
-findings related to TSP are unchanged in either magnitude or significance.</p>
-<p>The finding that a 5-minute TSP threshold appears to lengthen the headway
-relative to not using TSP at all is curious, and we cannot immediately
-account for it. The schedule of threshold changes was not randomized in any way,
+<p>In contrast, the estimates reveal that TSP significantly
+<em>narrows</em> the expected headway distribution, with fewer long headways and fewer
+short headways. And while most of the other explanatory variables have
+an effect on the median headway, TSP has no significant effect after these other
+variables have been controlled for.
+A potentially curious finding is that implementing a 2-minute TSP request
+threshold improves headway adherence more than allowing every transit vehicle to
+request TSP. This could be an artifact of the signal controller not
+granting requests in consecutive cycles, or it could be that always requesting TSP
+exacerbates bunching.</p>
+<p>The schedule of threshold changes was not randomized in any way,
 and it is possible that the results of this study are tied up in unaccounted
-seasonal variations. In spite of this curious finding, we find that — all else
-equal — TSP marginally improves the headway adherence of late-running BRT
-vehicles.</p>
+seasonal variation, or other omitted explanatory variables. These limitations
+notwithstanding, we find that — all else equal — TSP marginally improves the
+headway adherence of UVX.</p>
 
+
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div class="csl-entry">
+Koenker, Roger. 2020. <em>Quantreg: Quantile Regression</em>. <a href="https://CRAN.R-project.org/package=quantreg">https://CRAN.R-project.org/package=quantreg</a>.
+</div>
+<div class="csl-entry">
+Koenker, Roger, and Kevin F Hallock. 2001. <span>“Quantile Regression.”</span> <em>Journal of Economic Perspectives</em> 15 (4): 143–56.
+</div>
+<div class="csl-entry">
+Liu, Xiaoyue Cathy, Milan Zlatkovic, Richard J. Porter, Kiavash Fayyaz, and Song Yu. 2018. <span>“Improving Efficiency and Reliability of Bus Rapid Transit.”</span> MPC 18-349. Mountain-Plains Consortium; <a href="https://www.ugpti.org/resources/reports/downloads/mpc18-349.pdf">https://www.ugpti.org/resources/reports/downloads/mpc18-349.pdf</a>.
+</div>
+<div class="csl-entry">
+Ni, Ying-Chuan, Hsien-Hao Lo, Yu-Ting Hsu, and Hung-Jen Huang. 2020. <span>“Exploring the Effects of Passive Transit Signal Priority Design on Bus Rapid Transit Operation: A Microsimulation-Based Optimization Approach.”</span> <em>Transportation Letters</em> August. <a href="https://doi.org/10.1080/19427867.2020.1805681">https://doi.org/10.1080/19427867.2020.1805681</a>.
+</div>
+<div class="csl-entry">
+R Core Team. 2021. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/">https://www.R-project.org/</a>.
+</div>
+<div class="csl-entry">
+Sheffield, Michael H., Grant G. Schultz, David Bassett, and Dennis L. Eggett. 2020. <span>“Sensitivity Analysis of the Transit Signal Priority Requesting Threshold and the Impact on Bus Performance and General Traffic.”</span> <em>Transportation Research Record</em>. <a href="https://doi.org/10.1177/0361198120985853">https://doi.org/10.1177/0361198120985853</a>.
+</div>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="methods.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="methods.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

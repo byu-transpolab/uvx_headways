@@ -23,7 +23,7 @@
 
 
 
-<meta name="date" content="2021-04-28" />
+<meta name="date" content="2021-05-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -173,7 +173,6 @@ div.csl-indent {
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Questions</a></li>
 <li class="chapter" data-level="2" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>2</b> Methods</a></li>
 <li class="chapter" data-level="3" data-path="findings.html"><a href="findings.html"><i class="fa fa-check"></i><b>3</b> Findings</a></li>
-<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -216,10 +215,10 @@ WCG<br>
 BYU<br>
 <a class="author_email" href="mailto:#"><a href="mailto:loganbennett93@gmail.com" class="email">loganbennett93@gmail.com</a></a>
 </address>
-<p class="date" style="margin-top: 1.5em;"><em>2021-04-28</em></p>
+<p class="date" style="margin-top: 1.5em;"><em>2021-05-12</em></p>
 <div class="abstract">
 <p class="abstract">Abstract</p>
-<p>We report the results of an experiment to evaluate the impact of transit signal priority (TSP) on headway adherence for a bus rapid transit (BRT) system in Provo / Orem, Utah. The system grants TSP if the bus is running behind its unpublished schedule, but users perceive only a headway. In general, we find that more permissive TSP regimes modestly but significantly reduce the 85th percentile headway, controlling for directionality and time period. An inconsistent result gives that a strict TSP regime has a higher 85th percentile headway than not using TSP at all.</p>
+<p>We report the results of an experiment to evaluate the impact of transit signal priority (TSP) on headway adherence for a bus rapid transit (BRT) system in Provo / Orem, Utah. The bus requests TSP based on its unpublished schedule, but users perceive only a headway. Quantile regression models estimated on raw timepoint data from the BRT system reveal that TSP significantly improves headway adherence, after controlling for peak times, direction, and cumulative trip dwell time. We also find that requiring the bus to be 2 minutes late before requesting TSP improves headway adherence more than allowing all buses to request TSP.</p>
 </div>
 </div>
 <div id="intro" class="section level1" number="1">
@@ -228,32 +227,43 @@ BYU<br>
 transit vehicles. This may involve extending a green phase until the vehicle
 passes, triggering an early green if there is a vehicle waiting at the light, or
 even running specific transit-only phases. TSP helps transit vehicles maintain
-on-time performance <span class="citation">(<a href="#ref-Liu2018" role="doc-biblioref">Liu et al. 2018</a>)</span>, but often TSP will only engage at a signal if
+on-time performance <span class="citation">(<a href="#ref-sheffieldsensitivity" role="doc-biblioref">Sheffield et al. 2020</a>; <a href="#ref-Liu2018" role="doc-biblioref">Liu et al. 2018</a>)</span>, but often TSP will only engage at a signal if
 the vehicle is running behind its schedule, thus minimizing automobile delay
 when the bus is otherwise on schedule <span class="citation">(<a href="#ref-NI20201" role="doc-biblioref">Ni et al. 2020</a>)</span>.</p>
 <p>In 2018, the Utah Transit Authority (UTA) launched the Utah Valley Express (UVX)
 Bus Rapid Transit (BRT) system in Provo and Orem, Utah. The system connects
 two commuter rail stations, two major universities (Brigham Young and Utah Valley),
-and commercial districts in Orem and Provo. UVX has TSP on X of the X traffic
-signals along its route. The TSP is triggered when a vehicle is behind its schedule;
-however, the system does not publish a schedule and rather attempts to maintain
-a specific headway (6 minutes in the peak period and 10 minutes in the off-peak).</p>
-<p>The research questions are therefore:</p>
+and commercial districts in Orem and Provo. UVX has TSP on 44 of the 47 traffic
+signals along its route. A transit vehicle requests TSP the vehicle is behind its
+schedule; the signal controller may then grant the TSP based on a set of rules.
+For example, the signal will not grant TSP to transit vehicles traveling in the
+same direction in consecutive signal cycles. Specifically, at least two “clean” cycles
+must run before the signal controller will grant TSP again.</p>
+<p>Though the TSP system is based on a schedule, UTA does not publish a schedule
+for UVX. Instead informed that a bus will arrive on a specific
+headway: 6 minutes in the peak period and 10 minutes in the off-peak. UVX vehicles depart
+their initial time point on this schedule, but then proceed to the end of the route
+without consideration as to whether the vehicle is running ahead or behind its “schedule”
+as understood by the TSP system. It is
+unclear whether the actualized headway is affected by a schedule-based TSP
+system, potentially creating frustration for riders or inefficient operations.
+The research questions are therefore:</p>
 <ul>
 <li>Does schedule-based TSP improve headway adherence for rapid transit systems?</li>
-<li>Is there an average improvement, or is there a reduction in extreme delay?</li>
-<li>Is there an improvement difference by time of day or for particular portions
-of a rapid transit route?</li>
+<li>What other factors influence headway adherence: direction, dwell time, etc.?</li>
 </ul>
 
 </div>
 <h3>References</h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-Liu2018" class="csl-entry">
-Liu, Xiaoyue Cathy, Milan Zlatkovic, Richard J. Porter, Kiavash Fayyaz, and Song Yu. 2018. <span>“Improving Efficiency and Reliability of Bus Rapid Transit,”</span> June.
+Liu, Xiaoyue Cathy, Milan Zlatkovic, Richard J. Porter, Kiavash Fayyaz, and Song Yu. 2018. <span>“Improving Efficiency and Reliability of Bus Rapid Transit.”</span> MPC 18-349. Mountain-Plains Consortium; <a href="https://www.ugpti.org/resources/reports/downloads/mpc18-349.pdf">https://www.ugpti.org/resources/reports/downloads/mpc18-349.pdf</a>.
 </div>
 <div id="ref-NI20201" class="csl-entry">
-Ni, Ying-Chuan, Hsien-Hao Lo, Yu-Ting Hsu, and Hung-Jen Huang. 2020. <span>“Exploring the Effects of Passive Transit Signal Priority Design on Bus Rapid Transit Operation: A Microsimulation-Based Optimization Approach.”</span> <em>Transportation Letters</em> 0 (0): 1–14. <a href="https://doi.org/10.1080/19427867.2020.1805681">https://doi.org/10.1080/19427867.2020.1805681</a>.
+Ni, Ying-Chuan, Hsien-Hao Lo, Yu-Ting Hsu, and Hung-Jen Huang. 2020. <span>“Exploring the Effects of Passive Transit Signal Priority Design on Bus Rapid Transit Operation: A Microsimulation-Based Optimization Approach.”</span> <em>Transportation Letters</em> August. <a href="https://doi.org/10.1080/19427867.2020.1805681">https://doi.org/10.1080/19427867.2020.1805681</a>.
+</div>
+<div id="ref-sheffieldsensitivity" class="csl-entry">
+Sheffield, Michael H., Grant G. Schultz, David Bassett, and Dennis L. Eggett. 2020. <span>“Sensitivity Analysis of the Transit Signal Priority Requesting Threshold and the Impact on Bus Performance and General Traffic.”</span> <em>Transportation Research Record</em>. <a href="https://doi.org/10.1177/0361198120985853">https://doi.org/10.1177/0361198120985853</a>.
 </div>
 </div>
             </section>

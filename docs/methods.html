@@ -23,7 +23,7 @@
 
 
 
-<meta name="date" content="2021-04-28" />
+<meta name="date" content="2021-05-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -173,7 +173,6 @@ div.csl-indent {
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Questions</a></li>
 <li class="chapter" data-level="2" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>2</b> Methods</a></li>
 <li class="chapter" data-level="3" data-path="findings.html"><a href="findings.html"><i class="fa fa-check"></i><b>3</b> Findings</a></li>
-<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -196,39 +195,42 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="methods" class="section level1" number="2">
 <h1><span class="header-section-number"> 2</span> Methods</h1>
-<p>UTA provided timepoint data for all trips on the UVX system for the entirety of
+<p>UTA provided time point data for all trips on the UVX system for the entirety of
 2019. We calculated the headway between successive UVX trips at each stop, as
-well as the cumulative dwell time of all stations along the route. Because the
-UVX route loops around south Provo and stops at the Provo FrontRunner station
-twice, this created some minor difficulties in data processing, and we removed
-the timepoints on this portion of the route. We also limit our analysis to the
-period between 7 AM and 8 PM.</p>
+well as the cumulative dwell time of all stations along the route to that point.
+Because the UVX route loops around south Provo and stops at the Provo
+FrontRunner station twice, this created some minor difficulties in data
+processing, and we removed the time points on this portion of the route. We also
+limit our analysis to the periods between 7 AM and 8 PM when the system runs at
+a 6-minute headway. Time points within these periods are considered “AM Peak” if
+occurring between 7 and 9 AM, or “PM Peak” between 4 and 6 PM.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="methods.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_load</span>(period_change_table)</span>
 <span id="cb1-2"><a href="methods.html#cb1-2" aria-hidden="true" tabindex="-1"></a>period_change_table</span></code></pre></div>
-<p>From January through June 6, the system operated with a 5-minute TSP threshold,.
-with TSP granted only if the vehicle was five or more minutes behind its
-scheduled timepoint. After August 12, the system switched to a 2-minute TSP
+<p>From January through June 6, the system operated with a 5-minute TSP request
+threshold due to an erroneous system configuration; these time points were
+discarded. After August 12, the system switched to a 2-minute TSP request
 threshold. During the summer, the TSP system was configured as follows for this
 experiment:</p>
 <ul>
-<li>May 2 through June 6, 2019: 5 minute threshold</li>
 <li>June 10 through July 12 and after August 12: 2 minute threshold</li>
 <li>July 15 through July 26: no TSP</li>
-<li>July 30 through August 9: TSP always activated</li>
+<li>July 30 through August 9: TSP always requested</li>
 </ul>
-<p>We discarded trips from January through April and September through December
-because the additional university passenger demand could interfere in the
-experiment and there were no tests of the “None” or “Always” TSP thresholds
+<p>We also discarded trips from January through April and September through
+December because the additional university passenger demand could interfere in
+the experiment and there were no tests of the “None” or “Always” TSP thresholds
 during the school year.</p>
 <p>Standard statistical tests — such as the student’s <span class="math inline">\(t\)</span>-test or
 ordinary least squares regression models — are designed to ascertain the
 significance of a statistic at the <em>mean</em> of the distribution. In this
 application, we are less concerned with the mean deviation in headway, and are
 instead interested in whether TSP is able to reduce the lateness of buses that
-already have substantial deviation from their programmed headway. Consequently,
-we employ conditional quantile regression <span class="citation">(<a href="#ref-koenker2001quantile" role="doc-biblioref">Koenker and Hallock 2001</a>)</span> to estimate the
-effect of TSP on headway deviation at the 85th percentile of the distribution.
-This is done with the <code>quantreg</code> package for R <span class="citation">(<a href="#ref-quantreg" role="doc-biblioref">Koenker 2020</a>; <a href="#ref-R" role="doc-biblioref">R Core Team 2021</a>)</span></p>
+already have substantial deviation from their programmed headway. Further, a bus
+that is delayed from its intended headway may shorten the subsequent headway due
+to “bunching.” Consequently, we employ conditional quantile regression
+<span class="citation">(<a href="#ref-koenker2001quantile" role="doc-biblioref">Koenker and Hallock 2001</a>)</span> to estimate the effect of TSP requesting threshold on
+headway deviation at multiple percentiles of the distribution. This is
+done with the <code>quantreg</code> package for R <span class="citation">(<a href="#ref-quantreg" role="doc-biblioref">Koenker 2020</a>; <a href="#ref-R" role="doc-biblioref">R Core Team 2021</a>)</span></p>
 
 </div>
 <h3>References</h3>
