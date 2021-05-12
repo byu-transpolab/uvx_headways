@@ -67,9 +67,11 @@ modelsummary(
   estimate = "{estimate} ({statistic}){stars}",
   statistic = NULL, title = "Quantile Regression Estimates", 
   notes = c("t-statistics in parentheses, * p < 0.1, ** p < 0.05, *** p < 0.01",
-            "Coefficients represent change to expected headway in minutes.")
+            "Coefficients represent change to expected headway in minutes."),
+  escape=FALSE
   ) %>%
-   kable_styling(latex_options = c("scale_down")) 
+   kable_styling(latex_options = c("scale_down")) %>%
+   landscape()
 ```
 
 In contrast, the estimates reveal that TSP significantly 
