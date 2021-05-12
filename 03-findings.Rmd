@@ -1,13 +1,16 @@
 # Findings
 
 Figure \@ref(fig:ecdf) shows the empirical cumulative density function for the 
-headway deviation data, grouped by TSP threshold. Visually, the difference 
-between the various threshold settings is not dramatic. The 5-minute 
-threshold appears to have slightly more vehicles arrive ahead of the
-scheduled headway, and slightly fewer arrive behind it, than the other three
-threshold groups. The median and average of the distribution for all four
-thresholds is remarkably similar, and strengthens our determination to 
-examine the edges of the distribution with a quantile regression model.
+headway deviation data, grouped by TSP threshold. Note that a "perfect"
+headway distribution, where all vehicles maintain the exactly intended headway,
+would be step function with a vertical transition at six minutes. 
+Visually, the difference  between the various threshold settings is not dramatic. 
+The 2-minute threshold appears to have slightly more vehicles arrive behind the
+scheduled headway (6 minutes), and slightly more arrive before it, than the
+other two threshold groups. The median of the distribution for all
+four thresholds is remarkably similar and is just a few seconds behind the target
+headway. This observation strengthens our determination to examine the sides of
+the distribution --- rather than its center --- with a quantile regression model.
 
 ```{r ecdf, fig.cap="Cumulative probability distribution of headway deviation by threshold."}
 tar_load(ecdf)
@@ -26,12 +29,12 @@ tar_load(models)
 
 coef_map <- c(
   "(Intercept)" = "(Intercept)", 
-  "threshold5 min" = "TSP: 5 minutes",
   "threshold2 min" =  "TSP: 2 minutes",
   "thresholdAlways" = "TSP: Always",
   "directionSB"   = "Southbound", 
   "periodAM Peak" = "AM Peak", 
   "periodPM Peak" = "PM Peak", 
+  "cumdwell" = "Cumulative Dwell [minutes]", 
   "directionSB:periodAM Peak" = "Southbound $\\times$ AM Peak",  
   "directionSB:periodPM Peak" = "Southbound $\\times$ PM Peak"
 )
@@ -43,45 +46,45 @@ gm <- list(
 )
 ```
 
+Models estimating the headway effects of TSP requesting threshold and other factors 
+at an array of distribution quantiles are given in Table \@ref(tab:models-summ).
+In these models, the "(Intercept)" represents the expected headway at that percentile
+before considering additional information. For example, the 10th-percentile headway
+is `r coef(models[["0.1"]]$All)[1]` minutes, all else equal. The other
+coefficients in the models modify this average headway. Almost all coefficients are 
+significant, and many serve to widen the headway distribution.
+Buses traveling in the PM peak, for example, have a significantly higher 
+90th-percentile headway and a lower 10th-percentile headway. Buses traveling in the
+southbound direction also have a wider headway distribution than those in the 
+northbound direction, and an additional minute of cumulative dwell time widens the 
+the headway distribution. 
 
-```{r models_15}
-modelsummary(models[[1]], coef_map = coef_map, gof_map = gm,
-             estimate = "{estimate} ({statistic}){stars}",
-             statistic = NULL, title = "15th Percentile Regression Estimates", 
-             notes = c("t-statistics in parentheses", "* p < 0.1, ** p < 0.05, *** p < 0.01"))
+```{r models-summ}
+modelsummary(
+  lapply(models, function(x) x$All) %>% 
+    set_names(str_c(as.numeric(names(models)) * 100, "th")),
+  coef_map = coef_map, gof_map = gm,
+  estimate = "{estimate} ({statistic}){stars}",
+  statistic = NULL, title = "Quantile Regression Estimates", 
+  notes = c("t-statistics in parentheses, * p < 0.1, ** p < 0.05, *** p < 0.01",
+            "Coefficients represent change to expected headway in minutes.")
+  ) %>%
+   kable_styling(latex_options = c("scale_down")) 
 ```
 
-```{r models_85}
-modelsummary(models[[2]], coef_map = coef_map, gof_map = gm,
-             estimate = "{estimate} ({statistic}){stars}",
-             statistic = NULL, title = "85th Percentile Regression Estimates", 
-             notes = c("t-statistics in parentheses", "* p < 0.1, ** p < 0.05, *** p < 0.01"))
-```
+In contrast, the estimates reveal that TSP significantly 
+*narrows* the expected headway distribution, with fewer long headways and fewer
+short headways. And while most of the other explanatory variables have 
+an effect on the median headway, TSP has no significant effect after these other 
+variables have been controlled for. 
+A potentially curious finding is that implementing a 2-minute TSP request
+threshold improves headway adherence more than allowing every transit vehicle to
+request TSP. This could be an artifact of the signal controller not
+granting requests in consecutive cycles, or it could be that always requesting TSP
+exacerbates bunching.
 
-Table \@ref(tab:models) presents the estimates of four models with an array 
-of explanatory variables. In the model labeled "Threshold," each TSP threshold
-is controlled for with a dummy variable; the intercept term suggests that the
-85th percentile bus arrives with a headway `r coef(models[[1]])["(Intercept)"]` 
-minutes longer than it was supposed to have. The three threshold dummies are
-each significant, though the ordering of the coefficients is somewhat unintuitive.
-Relative to the situation with no TSP, making TSP always available reduces the 
-headway of the 85th percentile bus by `r -1 * coef(models[[1]])["thresholdAlways"]`
-minutes, and engaging TSP at a 2-minute threshold reduces the headway by
-`r -1 * coef(models[[1]])["threshold2 min"]`. What is not intuitive is that 
-engaging TSP with a 5-minute threshold actually makes the 85th percentile
-headway `r -1 * coef(models[[1]])["threshold5 min"]` minutes *longer* than 
-not using it at all.
-
-The other three models in Table \@ref(tab:models) control for the direction
-of the service (southbound buses from Orem to Provo have a longer headway), the
-time period (operating in the PM peak lengthens the headway), and an interaction
-term between those two variables. With each additional control, the central 
-findings related to TSP are unchanged in either magnitude or significance.
-
-The finding that a 5-minute TSP threshold appears to lengthen the headway 
-relative to not using TSP at all is curious, and we cannot immediately
-account for it. The schedule of threshold changes was not randomized in any way,
+The schedule of threshold changes was not randomized in any way,
 and it is possible that the results of this study are tied up in unaccounted
-seasonal variations. In spite of this curious finding, we find that --- all else
-equal --- TSP marginally improves the headway adherence of late-running BRT
-vehicles.
+seasonal variation, or other omitted explanatory variables. These limitations
+notwithstanding, we find that --- all else equal --- TSP marginally improves the
+headway adherence of UVX. 
