@@ -73,7 +73,8 @@ qr_estimate <- function(headways){
       "Threshold" = qfit_thold,
       "Direction" = update(qfit_thold, .~. + direction),
       "Peak" = update(qfit_thold, .~. + period),
-      "All" = update(qfit_thold, .~. + direction*period)
+      "Dwell" = update(qfit_thold, .~. + cumdwell),
+      "All" = update(qfit_thold, .~. + direction*period + cumdwell)
     )
   }) 
   
