@@ -30,8 +30,8 @@ clean_data <- function(timepoint_data){
       date = as_date(mdy(NEW_Date)),
       time = as_datetime(str_c(mdy(NEW_Date), " ", DepartureTime)),
       period = case_when(
-        hour(time) %in% c(7, 8, 9) ~ c("AM Peak"),
-        hour(time) %in% c(16, 17, 18) ~ c("PM Peak"),
+        hour(time) %in% c(7, 8) ~ c("AM Peak"),
+        hour(time) %in% c(16, 17) ~ c("PM Peak"),
         TRUE ~ "Off Peak"
       ),
       schedule = as_datetime(str_c(mdy(NEW_Date), " ", Schedule, ":00")),
