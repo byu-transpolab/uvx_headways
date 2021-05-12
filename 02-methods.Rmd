@@ -5,6 +5,7 @@ library(targets)
 library(tidyverse)
 library(quantreg)
 library(modelsummary)
+library(kableExtra)
 
 knitr::knit_hooks$set(
   inline = function(x) if (is.numeric(x) ) format(round(x, 3), big.mark = ",")
@@ -16,29 +17,30 @@ if(knitr::is_latex_output()){
 theme_set(theme_bw())
 ```
 
-UTA provided timepoint data for all trips on the UVX system for the entirety of
+UTA provided time point data for all trips on the UVX system for the entirety of
 2019. We calculated the headway between successive UVX trips at each stop, as
-well as the cumulative dwell time of all stations along the route. Because the
-UVX route loops around south Provo and stops at the Provo FrontRunner station
-twice, this created some minor difficulties in data processing, and we removed
-the timepoints on this portion of the route. We also limit our analysis to the
-periods between 7 AM and 8 PM when the system runs at a 6-minute headway. 
-Timepoints within these period are considered "AM Peak" if occurring between
-7 and 9 AM, or "PM Peak" between 4 and 6 PM.
+well as the cumulative dwell time of all stations along the route to that point.
+Because the UVX route loops around south Provo and stops at the Provo
+FrontRunner station twice, this created some minor difficulties in data
+processing, and we removed the time points on this portion of the route. We also
+limit our analysis to the periods between 7 AM and 8 PM when the system runs at
+a 6-minute headway. Time points within these periods are considered "AM Peak" if
+occurring between 7 and 9 AM, or "PM Peak" between 4 and 6 PM.
 
 ```{r times, eval = FALSE}
 tar_load(period_change_table)
 period_change_table
 ```
 
-From January through June 6, the system operated with a 5-minute TSP request threshold
-due to an erroneous system configuration; these timepoints were discarded. After
-August 12, the system switched to a 2-minute TSP threshold. During the summer,
-the TSP system was configured as follows for this experiment:
+From January through June 6, the system operated with a 5-minute TSP request
+threshold due to an erroneous system configuration; these time points were
+discarded. After August 12, the system switched to a 2-minute TSP request
+threshold. During the summer, the TSP system was configured as follows for this
+experiment:
 
 -   June 10 through July 12 and after August 12: 2 minute threshold
 -   July 15 through July 26: no TSP
--   July 30 through August 9: TSP always activated
+-   July 30 through August 9: TSP always requested
 
 We also discarded trips from January through April and September through
 December because the additional university passenger demand could interfere in
@@ -53,6 +55,6 @@ instead interested in whether TSP is able to reduce the lateness of buses that
 already have substantial deviation from their programmed headway. Further, a bus
 that is delayed from its intended headway may shorten the subsequent headway due
 to "bunching." Consequently, we employ conditional quantile regression
-[@koenker2001quantile] to estimate the effect of TSP on headway deviation at the
-15th and 85th percentiles of the distribution. This is done with the `quantreg`
-package for R [@quantreg; @R]
+[@koenker2001quantile] to estimate the effect of TSP requesting threshold on
+headway deviation at multiple percentiles of the distribution. This is
+done with the `quantreg` package for R [@quantreg; @R]
