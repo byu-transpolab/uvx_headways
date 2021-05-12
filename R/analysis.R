@@ -65,20 +65,18 @@ qr_estimate <- function(headways){
       period = fct_relevel(period, "Off Peak")
     )
   
+  tholds <- c('0.1', '0.15', '0.5', '0.85', '0.9')
   
-  models <- lapply(c(0.15, 0.85), function(tau) {
+  models <- lapply(as.numeric(tholds), function(tau) {
     qfit_thold <-  rq(hw_actl ~ threshold, tau = tau, data = data) 
     
     list(
       "Threshold" = qfit_thold,
-      "Direction" = update(qfit_thold, .~. + direction),
-      "Peak" = update(qfit_thold, .~. + period),
-      "Dwell" = update(qfit_thold, .~. + cumdwell),
       "All" = update(qfit_thold, .~. + direction*period + cumdwell)
     )
   }) 
   
-  names(models) <- c("0.15", "0.85")
+  names(models)  <- tholds
   models
     
 }
