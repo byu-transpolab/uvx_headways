@@ -35,7 +35,7 @@ keywords:
 biblio-style: apalike
 link-citations: yes
 abstract: |
-  We report the results of an experiment to evaluate the impact of transit  signal priority (TSP) on headway adherence for a bus rapid transit (BRT) system in Provo / Orem, Utah. The system grants TSP if the bus is running behind its unpublished schedule, but users perceive only a headway. In general, we  find that more permissive TSP regimes modestly but significantly reduce  the 85th percentile headway, controlling for directionality and time period. An inconsistent result gives that a strict TSP regime has a higher 85th  percentile headway than not using TSP at all.
+  We report the results of an experiment to evaluate the impact of transit  signal priority (TSP) on headway adherence for a bus rapid transit (BRT) system in Provo / Orem, Utah. The bus requests TSP based on its unpublished schedule, but users perceive only a headway. Quantile regression models estimated on raw timepoint data from the BRT system reveal that TSP significantly improves headway adherence, after controlling for peak times, direction, and cumulative trip dwell time. We also find that requiring the bus to be 2 minutes late before requesting TSP improves headway adherence more than allowing all buses to request TSP.
 description: "An analysis of headways on UVX responding to TSP"
 ---
 
