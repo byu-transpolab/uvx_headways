@@ -6,6 +6,9 @@
 *.aux
 *.log
 *.spl
+*.bbl
+*.out
+*.synctex.gz
 
 _targets/*
 _bookdown_files/*
