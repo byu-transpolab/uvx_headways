@@ -5,14 +5,14 @@ author:
     email: gregmacfarlane@byu.edu
     affiliation: BYU
     footnote: 1
-  - name: Grant Schultz
-    email: gschultz@byu.edu
-    affiliation: BYU
   - name: Michael Sheffield
     email: michael.sheffield@wcg.us
     affiliation: WCG
   - name: Logan Bennett
     email: loganbennett93@gmail.com
+    affiliation: BYU
+  - name: Grant Schultz
+    email: gschultz@byu.edu
     affiliation: BYU
 address:
   - code: BYU
@@ -93,7 +93,7 @@ In 2018, the Utah Transit Authority (UTA) launched the Utah Valley Express (UVX)
 Bus Rapid Transit (BRT) system in Provo and Orem, Utah. The system --- mapped in Figure \@ref(fig:uvxmap) --- connects
 two commuter rail stations, two major universities (Brigham Young and Utah Valley),
 and commercial districts in Orem and Provo. UVX has TSP on 44 of the 47 traffic 
-signals along its route. A transit vehicle requests TSP the vehicle is behind its
+signals along its route. A transit vehicle requests TSP when the vehicle is behind its
 schedule; the signal controller may then grant the TSP based on a set of rules. 
 For example, the signal will not grant TSP to transit vehicles traveling in the 
 same direction in consecutive signal cycles. Specifically, at least two "clean" cycles
@@ -126,7 +126,7 @@ if(!knitr::is_latex_output()){
 
 
 Though the TSP system is based on a schedule, UTA does not publish a schedule
-for UVX. Instead informed that a bus will arrive on a specific
+for UVX. Instead it is expected that a bus will arrive on a specific
 headway: 6 minutes in the peak period and 10 minutes in the off-peak. UVX vehicles depart
 their initial time point on this schedule, but then proceed to the end of the route 
 without consideration as to whether the vehicle is running ahead or behind its "schedule"
