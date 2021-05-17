@@ -1,36 +1,25 @@
 # Methods
 
+UTA provided time point data for all trips on the UVX system during the summer
+of 2019. During this period, the TSP requesting threshold was set at three
+different levels:
 
+  - June 10 through July 12 and after August 12: 2 minute threshold
+  - July 15 through July 26: no TSP
+  - July 30 through August 9: TSP always requested
 
-UTA provided time point data for all trips on the UVX system for the entirety of
-2019. We calculated the headway between successive UVX trips at each stop, as
+We calculated the headway between successive UVX trips at each stop, as
 well as the cumulative dwell time of all stations along the route to that point.
-Because the UVX route loops around south Provo and stops at the Provo
-FrontRunner station twice, this created some minor difficulties in data
-processing, and we removed the time points on this portion of the route. We also
-limit our analysis to the periods between 7 AM and 8 PM when the system runs at
-a 6-minute headway. Time points within these periods are considered "AM Peak" if
-occurring between 7 and 9 AM, or "PM Peak" between 4 and 6 PM.
+To control for omitted variables, we  limited our analysis to the periods
+between 7 AM and 8 PM when the system runs at a 6-minute headway. Time points
+within these periods are considered "AM Peak" if occurring between 7 and 9 AM,
+or "PM Peak" between 4 and 6 PM. We also discard timepoints in south Provo where
+UVX runs on a one-way circulating loop. 
 
 ```{r times, eval = FALSE}
 tar_load(period_change_table)
 period_change_table
 ```
-
-From January through June 6, the system operated with a 5-minute TSP request
-threshold due to an erroneous system configuration; these time points were
-discarded. After August 12, the system switched to a 2-minute TSP request
-threshold. During the summer, the TSP system was configured as follows for this
-experiment:
-
--   June 10 through July 12 and after August 12: 2 minute threshold
--   July 15 through July 26: no TSP
--   July 30 through August 9: TSP always requested
-
-We also discarded trips from January through April and September through
-December because the additional university passenger demand could interfere in
-the experiment and there were no tests of the "None" or "Always" TSP thresholds
-during the school year.
 
 Standard statistical tests --- such as the student's $t$-test or 
 ordinary least squares regression models --- are designed to ascertain the 
@@ -43,3 +32,6 @@ to "bunching." Consequently, we employ conditional quantile regression
 [@koenker2001quantile] to estimate the effect of TSP requesting threshold on
 headway deviation at multiple percentiles of the distribution. This is
 done with the `quantreg` package for R [@quantreg; @R]
+
+Raw data and complete analysis code are available in a public 
+[GitHub repository](https://github.com/byu-transpolab/uvx_headways).
