@@ -28,6 +28,8 @@ documentclass: article
 journal: "Submitted to Transport Findings"
 bibliography: [book.bib]
 layout: "3p, authoryear, review"
+biblio-style: model5-names
+csl: apa
 keywords:
   - Public transit,
   - Transit signal priority,
