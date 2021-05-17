@@ -99,7 +99,7 @@ For example, the signal will not grant TSP to transit vehicles traveling in the
 same direction in consecutive signal cycles. Specifically, at least two "clean" cycles
 must run before the signal controller will grant TSP again.
 
-```{r uvxmap, fig.cap="UVX System Alignment and Stations.", cache = FALSE}
+```{r uvxmap, fig.cap="UVX system stations and alignment.", cache = FALSE}
 dj1 <- wesanderson::wes_palette("Darjeeling1")
 uvx <- st_read("data/uvx_map.geojson", quiet = TRUE)
 uvx_stops <- uvx %>% filter(st_is(., "POINT"))
