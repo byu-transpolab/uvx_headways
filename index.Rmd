@@ -88,7 +88,7 @@ the vehicle is running behind its schedule, thus minimizing automobile delay
 when the bus is otherwise on schedule [@NI20201].
 
 In 2018, the Utah Transit Authority (UTA) launched the Utah Valley Express (UVX) 
-Bus Rapid Transit (BRT) system in Provo and Orem, Utah.  The system connects
+Bus Rapid Transit (BRT) system in Provo and Orem, Utah. The system --- mapped in Figure \@ref(fig:uvxmap) --- connects
 two commuter rail stations, two major universities (Brigham Young and Utah Valley),
 and commercial districts in Orem and Provo. UVX has TSP on 44 of the 47 traffic 
 signals along its route. A transit vehicle requests TSP the vehicle is behind its
@@ -96,6 +96,32 @@ schedule; the signal controller may then grant the TSP based on a set of rules.
 For example, the signal will not grant TSP to transit vehicles traveling in the 
 same direction in consecutive signal cycles. Specifically, at least two "clean" cycles
 must run before the signal controller will grant TSP again.
+
+```{r uvxmap, fig.cap="UVX System Alignment and Stations.", cache = FALSE}
+dj1 <- wesanderson::wes_palette("Darjeeling1")
+uvx <- st_read("data/uvx_map.geojson", quiet = TRUE)
+uvx_stops <- uvx %>% filter(st_is(., "POINT"))
+uvx_line  <- uvx %>% filter(st_is(., c("MULTILINESTRING", "LINESTRING")))
+if(!knitr::is_latex_output()){
+  leaflet() %>%
+    addProviderTiles(providers$Esri.WorldGrayCanvas) %>%
+    addPolylines(data = uvx_line) %>%
+    addCircleMarkers(data = uvx_stops, label = ~(name))
+} else {
+  pbox <- st_bbox(uvx_line)
+  map_back <- get_map(c(lon = mean(pbox[c(1, 3)]), lat = mean(pbox[c(2, 4)]) ),  
+                      zoom = 13, source = "stamen", color = "bw")
+  
+  ggmap(map_back, extent = "device") + 
+    coord_sf(crs = st_crs(3426),  expand = FALSE) + 
+    geom_sf(data = uvx_line, inherit.aes = FALSE, lwd = 1, color = dj1[1])  + 
+    geom_sf(data = uvx_stops, inherit.aes = FALSE, size = 5, stroke = 1, shape = 21,
+            fill = "white", color = dj1[5])  + 
+    theme(axis.line = element_line(color = NA))  + 
+    xlab("") + ylab("") 
+}
+```
+
 
 Though the TSP system is based on a schedule, UTA does not publish a schedule
 for UVX. Instead informed that a bus will arrive on a specific
