@@ -3,7 +3,7 @@
 Figure \@ref(fig:ecdf) shows the empirical cumulative density function for the 
 headway deviation data, grouped by TSP threshold. Note that a "perfect"
 headway distribution, where all vehicles maintain the exactly intended headway,
-would be step function with a vertical transition at six minutes. 
+would be a step function with a vertical transition at 6 minutes. 
 Visually, the difference  between the various threshold settings is not dramatic. 
 The 2-minute threshold appears to have slightly more vehicles arrive behind the
 scheduled headway (6 minutes), and slightly more arrive before it, than the
@@ -56,8 +56,8 @@ significant, and many serve to widen the headway distribution.
 Buses traveling in the PM peak, for example, have a significantly higher 
 90th-percentile headway and a lower 10th-percentile headway. Buses traveling in the
 southbound direction also have a wider headway distribution than those in the 
-northbound direction, and an additional minute of cumulative dwell time widens the 
-the headway distribution. 
+northbound direction (implied to be $0$), and each additional minute of cumulative dwell
+time widens the headway distribution.
 
 ```{r models-summ}
 modelsummary(
@@ -70,8 +70,7 @@ modelsummary(
             "Coefficients represent change to expected headway in minutes."),
   escape=FALSE
   ) %>%
-   kable_styling(latex_options = c("scale_down")) %>%
-   landscape()
+   kable_styling(latex_options = c("scale_down")) 
 ```
 
 In contrast, the estimates reveal that TSP significantly 
@@ -81,12 +80,10 @@ an effect on the median headway, TSP has no significant effect after these other
 variables have been controlled for. 
 A potentially curious finding is that implementing a 2-minute TSP request
 threshold improves headway adherence more than allowing every transit vehicle to
-request TSP. This could be an artifact of the signal controller not
-granting requests in consecutive cycles, or it could be that always requesting TSP
-exacerbates bunching.
+request TSP. This finding echoes the schedule-based TSP analysis by @sheffieldUDOT.
 
 The schedule of threshold changes was not randomized in any way,
 and it is possible that the results of this study are tied up in unaccounted
 seasonal variation, or other omitted explanatory variables. These limitations
-notwithstanding, we find that --- all else equal --- TSP marginally improves the
-headway adherence of UVX. 
+notwithstanding, we find that --- all else equal --- schedule-based TSP
+marginally improves the headway adherence of UVX.
