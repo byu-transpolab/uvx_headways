@@ -12,7 +12,7 @@ four thresholds is remarkably similar and is just a few seconds behind the targe
 headway. This observation strengthens our determination to examine the sides of
 the distribution --- rather than its center --- with a quantile regression model.
 
-```{r ecdf, fig.cap="Cumulative probability distribution of headway deviation by threshold."}
+```{r ecdf, dev=if(knitr:::is_latex_output()) 'tikz' else 'svg', fig.cap="Cumulative probability distribution of headway deviation by threshold."}
 tar_load(ecdf)
 ecdf + 
   xlab("Actual Headway [minutes]") +
