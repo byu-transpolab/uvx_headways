@@ -8,7 +8,7 @@ Visually, the difference  between the various threshold settings is not dramatic
 The 2-minute threshold appears to have slightly more vehicles arrive behind the
 scheduled headway (6 minutes), and slightly more arrive before it, than the
 other two threshold groups. The median of the distribution for all
-four thresholds is remarkably similar and is just a few seconds behind the target
+three thresholds is remarkably similar and is just a few seconds behind the target
 headway. This observation strengthens our determination to examine the sides of
 the distribution --- rather than its center --- with a quantile regression model.
 
