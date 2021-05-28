@@ -136,6 +136,7 @@ system, potentially creating frustration for riders or inefficient operations.
 The research questions are therefore:
 
   - Does schedule-based TSP improve headway adherence for rapid transit systems?
-  - What other factors influence headway adherence: direction, dwell time, etc.?
+  - What is the effect of other controlling factors --- specifically time period, 
+  direction of travel, and cumulative stop dwell time --- on headway adherence?
 
 
