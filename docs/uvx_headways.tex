@@ -141,7 +141,8 @@ The research questions are therefore:
 \item
   Does schedule-based TSP improve headway adherence for rapid transit systems?
 \item
-  What other factors influence headway adherence: direction, dwell time, etc.?
+  What is the effect of other controlling factors --- specifically time period,
+  direction of travel, and cumulative stop dwell time --- on headway adherence?
 \end{itemize}
 
 \hypertarget{methods}{%
@@ -195,7 +196,7 @@ Visually, the difference between the various threshold settings is not dramatic.
 The 2-minute threshold appears to have slightly more vehicles arrive behind the
 scheduled headway (6 minutes), and slightly more arrive before it, than the
 other two threshold groups. The median of the distribution for all
-four thresholds is remarkably similar and is just a few seconds behind the target
+three thresholds is remarkably similar and is just a few seconds behind the target
 headway. This observation strengthens our determination to examine the sides of
 the distribution --- rather than its center --- with a quantile regression model.
 
@@ -209,15 +210,16 @@ Models estimating the headway effects of TSP requesting threshold and other fact
 at an array of distribution quantiles are given in Table \ref{tab:models-summ}.
 In these models, the ``(Intercept)'' represents the expected headway at that percentile
 before considering additional information. For example, the 10th-percentile headway
-is 4.649 minutes, all else equal. The other
+is 4.649 minutes (4 minutes and 39 seconds), all else equal.
+The other
 coefficients in the models modify this average headway. Almost all coefficients are
 significant, and many serve to widen the headway distribution.
 Buses traveling in the PM peak, for example, have a significantly higher
 90th-percentile headway and a lower 10th-percentile headway than buses
 traveling outside of the AM or PM peaks. Buses traveling in the
 southbound direction also have a wider headway distribution than those in the
-northbound direction (implied to be \(0\)), and each additional minute of cumulative dwell
-time widens the headway distribution.
+northbound direction (implied to be \(0\)), and each additional minute of
+cumulative dwell time widens the headway distribution.
 
 \begin{table}
 
@@ -253,13 +255,22 @@ an effect on the median headway, TSP has no significant effect after these other
 variables have been controlled for.
 A potentially curious finding is that implementing a 2-minute TSP request
 threshold improves headway adherence more than allowing every transit vehicle to
-request TSP. This finding echoes the schedule-based TSP analysis by \citet{sheffieldUDOT}.
+request TSP. This finding echoes the schedule-based TSP analysis of UVX by
+\citet{sheffieldUDOT}. A finding by \citet{sheffieldsensitivity} that a 0-minute threshold is
+best on arterial bus systems may only apply to routes with longer headways.
 
 The schedule of threshold changes was not randomized in any way,
 and it is possible that the results of this study are tied up in unaccounted
 seasonal variation, or other omitted explanatory variables. These limitations
 notwithstanding, we find that --- all else equal --- schedule-based TSP
 marginally improves the headway adherence of UVX.
+
+\hypertarget{acknowledgements}{%
+\section{Acknowledgements}\label{acknowledgements}}
+
+We are grateful to the Utah Department of Transportation and UTA for supporting
+this research by providing data and configuring the experiment. Graphics and
+tables were produced with several open-source R packages \citep{ggmap, modelsummary, wesanderson}.
 
 \bibliography{book.bib}
 
