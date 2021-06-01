@@ -44,21 +44,25 @@ gm <- list(
   list("raw" = "AIC", "clean" = "AIC", "fmt" = f1),
   list("raw" = "logLik", "clean" = "Log Likelihood", "fmt" = f1)
 )
+raw_coef <- coef(models[["0.1"]]$All)[1]
+minutes <- floor(raw_coef)
+seconds <- round((raw_coef - minutes) * 60)
 ```
 
 Models estimating the headway effects of TSP requesting threshold and other factors 
 at an array of distribution quantiles are given in Table \@ref(tab:models-summ).
 In these models, the "(Intercept)" represents the expected headway at that percentile
 before considering additional information. For example, the 10th-percentile headway
-is `r coef(models[["0.1"]]$All)[1]` minutes, all else equal. The other
+is `r raw_coef` minutes (`r minutes` minutes and `r seconds` seconds), all else equal.
+The other
 coefficients in the models modify this average headway. Almost all coefficients are 
 significant, and many serve to widen the headway distribution.
 Buses traveling in the PM peak, for example, have a significantly higher 
 90th-percentile headway and a lower 10th-percentile headway than buses
 traveling outside of the AM or PM peaks. Buses traveling in the
 southbound direction also have a wider headway distribution than those in the 
-northbound direction (implied to be $0$), and each additional minute of cumulative dwell
-time widens the headway distribution.
+northbound direction (implied to be $0$), and each additional minute of
+cumulative dwell time widens the headway distribution.
 
 ```{r models-summ}
 modelsummary(
