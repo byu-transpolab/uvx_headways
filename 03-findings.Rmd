@@ -81,7 +81,9 @@ an effect on the median headway, TSP has no significant effect after these other
 variables have been controlled for. 
 A potentially curious finding is that implementing a 2-minute TSP request
 threshold improves headway adherence more than allowing every transit vehicle to
-request TSP. This finding echoes the schedule-based TSP analysis by @sheffieldUDOT.
+request TSP. This finding echoes the schedule-based TSP analysis of UVX by
+@sheffieldUDOT. A finding by @sheffieldsensitivity that a 0-minute threshold is
+best on arterial bus systems may only apply to routes with longer headways.
 
 The schedule of threshold changes was not randomized in any way,
 and it is possible that the results of this study are tied up in unaccounted
